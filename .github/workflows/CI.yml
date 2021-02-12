@@ -29,7 +29,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - run: npm install
+      - run: npm ci
 
       - name: Lint jsx
         run: npm run lint
@@ -60,7 +60,7 @@ jobs:
 
       - name: Build site
         run: |
-          npm install
+          npm ci
           npm run build
 
       - name: Deploy 🥳🎉
