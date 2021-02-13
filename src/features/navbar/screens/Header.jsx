@@ -46,7 +46,7 @@ class Header extends Component {
             () => {
                 const theme = this.state.isLightTheme ? 'light' : 'dark';
                 root.setAttribute('data-theme', theme);
-                localStorage.setItem('data-theme', theme);
+                localStorage.setItem('theme', theme);
             }
         );
     }
