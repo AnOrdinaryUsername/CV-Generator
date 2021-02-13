@@ -1,0 +1,23 @@
+.form-container {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 90rem;
+  min-height: 50rem;
+  padding: 4.8rem;
+  width: 100%;
+}
+
+.form--round {
+  background-color: hsl(0, 0%, 100%);
+  border-radius: 2.4rem;
+  box-shadow: 0 3px hsl(220, 7%, 83%);
+}

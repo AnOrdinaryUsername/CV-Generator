@@ -1,0 +1,24 @@
+.fieldset {
+  position: relative;
+  width: 100%;
+}
+
+.legend {
+  float: left;
+  width: 40%;
+}
+
+.legend h2 {
+  font-size: 1.25em;
+}
+
+.legend p {
+  color: hsl(194, 67%, 27%);
+  font-size: 1em;
+  margin-top: 0.8rem;
+}
+
+.input-container {
+  float: right;
+  width: 60%;
+}
