@@ -1,0 +1,13 @@
+.input {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.8rem;
+}
+
+.input:first-child {
+  margin-top: 0;
+}
+
+.input input {
+  margin-top: 0.6rem;
+}
