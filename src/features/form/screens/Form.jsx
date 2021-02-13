@@ -16,7 +16,7 @@ class Form extends Component {
             <FormLayout>
                 <FormFieldset
                     title="Personal Information"
-                    description="Share your contact information so that companies know how to reach you."
+                    description="Share your contact information so companies know how to reach you."
                 >
                     <TextInput
                         id="email"
