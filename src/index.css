@@ -161,12 +161,20 @@ table {
   --bg-color: hsl(204, 15%, 94%);
   --font-color: hsl(0, 0%, 46%);
   --heading-color: hsl(0, 0%, 26%);
+
+  --form-bg-color: hsl(0, 0%, 100%);
+  --form-shadow-color: hsl(220deg 7% 83%);
+  --legend-desc-color: hsl(194, 67%, 27%);
 }
 
 [data-theme='dark'] {
   --bg-color: hsl(232, 20%, 17%);
   --heading-color: hsl(0, 0%, 100%);
   --font-color: hsl(0, 0%, 96%);
+
+  --form-bg-color: hsla(231, 30%, 22%, 0.85);
+  --form-shadow-color: hsl(231deg 39% 8%);
+  --legend-desc-color: hsl(194, 67%, 82%);
 }
 
 html {
@@ -235,6 +243,7 @@ main {
   flex: 1;
   flex-direction: column;
   justify-content: flex-start;
+  margin-bottom: 5%;
 }
 
 /*
