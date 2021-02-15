@@ -10,23 +10,9 @@ class Form extends Component {
     constructor() {
         super();
 
-        /*
-                    field                                             inputs ( [ ] = input box)
-            ╭――――――――――――――――――╮           ╭――――――――――――――――――――╮
-            │     title                   │           │                                 │
-            │     description            │           │     ╭―――――――――――――╮   │
-            │                              │           │     │  label1    label2 │  │
-            ╰――――――――――――――――――╯           │     │  [     ]    [     ] │ <-------- Row
-                                                         │     ╰―――――――――――――╯   │
-                                                         │                                 │
-                                                         │      label3                    │
-                                                         │      [                      ]   │
-                                                         ╰――――――――――――――――――――╯
-
-        */
         this.formSection = [
             {
-                field: {
+                legend: {
                     title: 'Personal Information',
                     description:
                         'Share your contact information so companies know how to reach you.',
@@ -58,7 +44,7 @@ class Form extends Component {
                                 label: 'Email address',
                                 id: 'email',
                                 name: 'email',
-                                placeholder: 'e.g. enterprise6@gmail.com',
+                                placeholder: 'e.g. enterprise6@email.com',
                             },
                             {
                                 type: 'phone',
@@ -79,10 +65,10 @@ class Form extends Component {
                 ],
             },
             {
-                field: {
+                legend: {
                     title: 'Education History',
                     description:
-                        'Having a degree shows an ability to learn. Althought not required, you may include it if you wish to share.',
+                        'Having a degree shows an ability to learn. Although not required, you may include it if you wish to share.',
                 },
                 inputs: [
                     {
@@ -114,7 +100,7 @@ class Form extends Component {
                 ],
             },
             {
-                field: {
+                legend: {
                     title: 'Work Experience',
                     description:
                         'Employers love practical experience. List all relevant work stuff.',
@@ -139,7 +125,7 @@ class Form extends Component {
             <FormLayout>
                 {this.formSection.map((element) => {
                     return (
-                        <FormFieldset {...element.field} key={uniqid()}>
+                        <FormFieldset {...element.legend} key={uniqid()}>
                             {element.inputs.map((element) => {
                                 if (element.row) {
                                     return (
