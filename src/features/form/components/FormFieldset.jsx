@@ -3,7 +3,7 @@ import './FormFieldset.css';
 
 const FormFieldset = ({ title, description, children }) => {
     return (
-        <fieldset className="fieldset">
+        <fieldset>
             <legend className="legend">
                 <h2>{title}</h2>
                 <p>{description}</p>
