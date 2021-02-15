@@ -31,8 +31,7 @@ fieldset:first-child {
 }
 
 .input-container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   float: right;
   padding-left: 3.6rem;
   row-gap: 1.8rem;
