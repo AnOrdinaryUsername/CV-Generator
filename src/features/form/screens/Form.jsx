@@ -139,39 +139,19 @@ class Form extends Component {
             <FormLayout>
                 {this.formSection.map((element) => {
                     return (
-                        <FormFieldset
-                            title={element.field.title}
-                            description={element.field.description}
-                            key={uniqid()}
-                        >
+                        <FormFieldset {...element.field} key={uniqid()}>
                             {element.inputs.map((element) => {
                                 if (element.row) {
                                     return (
                                         <div className="row" key={uniqid()}>
                                             {element.row.map((element) => {
-                                                return (
-                                                    <TextInput
-                                                        label={element.label}
-                                                        id={element.id}
-                                                        name={element.id}
-                                                        placeholder={element.placeholder}
-                                                        key={uniqid()}
-                                                    />
-                                                );
+                                                return <TextInput {...element} key={uniqid()} />;
                                             })}
                                         </div>
                                     );
                                 }
 
-                                return (
-                                    <TextInput
-                                        label={element.label}
-                                        id={element.id}
-                                        name={element.id}
-                                        placeholder={element.placeholder}
-                                        key={uniqid()}
-                                    />
-                                );
+                                return <TextInput {...element} key={uniqid()} />;
                             })}
                         </FormFieldset>
                     );
