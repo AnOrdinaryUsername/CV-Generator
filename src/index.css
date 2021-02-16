@@ -159,22 +159,24 @@ table {
 /* Default is light theme. */
 :root {
   --bg-color: hsl(204, 15%, 94%);
-  --font-color: hsl(0, 0%, 46%);
+  --font-color: hsl(0, 0%, 30%);
   --heading-color: hsl(0, 0%, 26%);
 
   --form-bg-color: hsl(0, 0%, 100%);
   --form-shadow-color: hsl(220deg 7% 83%);
   --legend-desc-color: hsl(194, 67%, 27%);
+  --fieldset-line-color: hsla(0, 0%, 26%, 0.4); /* Based on heading color */
 }
 
 [data-theme='dark'] {
   --bg-color: hsl(232, 20%, 17%);
-  --heading-color: hsl(0, 0%, 100%);
   --font-color: hsl(0, 0%, 96%);
+  --heading-color: hsl(0, 0%, 100%);
 
   --form-bg-color: hsla(231, 30%, 22%, 0.85);
   --form-shadow-color: hsl(231deg 39% 8%);
   --legend-desc-color: hsl(194, 67%, 82%);
+  --fieldset-line-color: hsla(0, 0%, 100%, 0.4); /* Based on heading color */
 }
 
 html {
@@ -202,6 +204,8 @@ button {
   appearance: none;
   border: none;
   cursor: pointer;
+  font-family: inherit;
+  line-height: normal;
 }
 
 code {
