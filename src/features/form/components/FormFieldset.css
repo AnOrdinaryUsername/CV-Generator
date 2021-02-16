@@ -1,10 +1,25 @@
 fieldset {
+  /* Margin and padding has to match for even spacing */
   margin-top: 4.8rem;
+  padding-bottom: 4.8rem;
+  position: relative;
   width: 100%;
 }
 
 fieldset:first-child {
   margin-top: 0;
+}
+
+/* Line under fieldset */
+fieldset::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid var(--fieldset-line-color);
 }
 
 .legend {
@@ -32,7 +47,6 @@ fieldset:first-child {
 
 .input-container {
   display: grid;
-  float: right;
   padding-left: 3.6rem;
   row-gap: 1.8rem;
   width: 60%;
