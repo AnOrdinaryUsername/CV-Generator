@@ -16,6 +16,7 @@
 }
 
 .input input {
+  background-color: hsl(204, 23%, 96%);
   border: none;
   box-shadow: 0px 0px 2px 0px hsl(0deg 0% 7%);
   font-size: 1em;
