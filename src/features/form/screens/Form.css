@@ -1,6 +1,29 @@
+@keyframes text-enter {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+}
+
+.text-anim-1 {
+  animation: text-enter 0.3s ease-in-out calc(1 * 0.05s) 1 backwards;
+}
+
+.text-anim-2 {
+  animation: text-enter 0.3s ease-in-out calc(2 * 0.05s) 1 backwards;
+}
+
+.text-anim-3 {
+  animation: text-enter 0.3s ease-in-out calc(3 * 0.05s) 1 backwards;
+}
+
+.text-anim-4 {
+  animation: text-enter 0.3s ease-in-out calc(4 * 0.05s) 1 backwards;
+}
+
 .row {
   column-gap: 1.8rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   row-gap: 1.2rem;
 }
