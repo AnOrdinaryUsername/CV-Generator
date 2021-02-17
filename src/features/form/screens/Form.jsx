@@ -3,7 +3,6 @@ import uniqid from 'uniqid';
 import PrintButton from '../../../shared/Button/PrintButton';
 import FormFieldset from '../components/FormFieldset';
 import FormLayout from '../components/FormLayout';
-import { TextInput } from '../components/Inputs';
 import './Form.css';
 
 class Form extends Component {
@@ -23,8 +22,8 @@ class Form extends Component {
                             {
                                 type: 'text',
                                 label: 'First Name',
-                                // Stuff that gets passed
                                 id: 'first-name',
+                                isRequired: true,
                                 name: 'firstName',
                                 placeholder: 'e.g. Biggy',
                             },
@@ -32,6 +31,7 @@ class Form extends Component {
                                 type: 'text',
                                 label: 'Last Name',
                                 id: 'last-name',
+                                isRequired: true,
                                 name: 'lastName',
                                 placeholder: 'e.g. Enterprise',
                             },
@@ -43,6 +43,7 @@ class Form extends Component {
                                 type: 'email',
                                 label: 'Email address',
                                 id: 'email',
+                                isRequired: true,
                                 name: 'email',
                                 placeholder: 'e.g. enterprise6@email.com',
                             },
@@ -50,6 +51,7 @@ class Form extends Component {
                                 type: 'phone',
                                 label: 'Phone Number',
                                 id: 'phone-number',
+                                isRequired: true,
                                 name: 'phoneNumber',
                                 placeholder: 'e.g. (123) 456-7890',
                             },
@@ -59,6 +61,7 @@ class Form extends Component {
                         type: 'text',
                         label: 'Residence',
                         id: 'residence',
+                        isRequired: true,
                         name: 'residence',
                         placeholder: 'e.g. Newport News, US',
                     },
@@ -76,8 +79,8 @@ class Form extends Component {
                             {
                                 type: 'text',
                                 label: 'School Name',
-                                // Stuff that gets passed
                                 id: 'school-name',
+                                isRequired: false,
                                 name: 'schoolName',
                                 placeholder: 'e.g. Harvard University',
                             },
@@ -85,6 +88,7 @@ class Form extends Component {
                                 type: 'text',
                                 label: 'Field of Study',
                                 id: 'field-of-study',
+                                isRequired: false,
                                 name: 'fieldOfStudy',
                                 placeholder: 'e.g. Computer Science, B.S.',
                             },
@@ -94,6 +98,7 @@ class Form extends Component {
                         type: 'text',
                         label: 'Date',
                         id: 'date',
+                        isRequired: false,
                         name: 'date',
                         placeholder: 'e.g. 05/12/1938-02/17/1947',
                     },
@@ -110,6 +115,7 @@ class Form extends Component {
                         type: 'text',
                         label: 'Date',
                         id: 'date',
+                        isRequired: false,
                         name: 'date',
                         placeholder: 'e.g. 05/12/1938-02/17/1947',
                     },
@@ -123,24 +129,8 @@ class Form extends Component {
     render() {
         return (
             <FormLayout>
-                {this.formSection.map((element) => {
-                    return (
-                        <FormFieldset {...element.legend} key={uniqid()}>
-                            {element.inputs.map((element) => {
-                                if (element.row) {
-                                    return (
-                                        <div className="row" key={uniqid()}>
-                                            {element.row.map((element) => {
-                                                return <TextInput {...element} key={uniqid()} />;
-                                            })}
-                                        </div>
-                                    );
-                                }
-
-                                return <TextInput {...element} key={uniqid()} />;
-                            })}
-                        </FormFieldset>
-                    );
+                {this.formSection.map((fieldsetData) => {
+                    return <FormFieldset {...fieldsetData} key={uniqid()} />;
                 })}
                 <PrintButton />
             </FormLayout>
