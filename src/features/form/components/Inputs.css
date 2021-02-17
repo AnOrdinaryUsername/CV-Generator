@@ -25,3 +25,8 @@
   border-radius: 0.6rem;
   padding: 0 1.6rem;
 }
+
+.new-info {
+  background-color: inherit;
+  color: var(--legend-desc-color);
+}
