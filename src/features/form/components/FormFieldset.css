@@ -48,7 +48,7 @@ fieldset::after {
 .input-container {
   display: grid;
   padding-left: 3.6rem;
-  row-gap: 1.8rem;
+  row-gap: 4rem;
   width: 60%;
 }
 
@@ -57,4 +57,9 @@ fieldset::after {
     padding-left: 0;
     width: 100%;
   }
+}
+
+.new-inputs {
+  display: grid;
+  row-gap: 1.8rem;
 }

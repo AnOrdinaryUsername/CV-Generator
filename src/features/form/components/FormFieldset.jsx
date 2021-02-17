@@ -5,7 +5,7 @@ import './FormFieldset.css';
 
 const Inputs = ({ inputs, enableAnimation }) => {
     return (
-        <div>
+        <div className="new-inputs">
             {inputs.map((element, index) => {
                 // Show animation only when adding new inputs.
                 const animation = enableAnimation ? `text-anim-${index + 1}` : ``;
