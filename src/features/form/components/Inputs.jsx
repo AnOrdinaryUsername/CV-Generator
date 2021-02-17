@@ -1,41 +1,53 @@
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import '../../../shared/Button/PrintButton.css';
 import './Inputs.css';
 
-const TextInput = ({ id, label, name, placeholder, value }) => {
+// isRequired, onChange, type
+const Input = ({ animation, id, isRequired, label, name, onChange, placeholder, type, value }) => {
+    const inputProps = {};
+
+    switch (type) {
+        case 'text':
+            // Allows all language characters.
+            inputProps.pattern = '^\\p{L}*$';
+            inputProps.type = 'text';
+            break;
+        case 'email':
+            inputProps.type = 'email';
+            break;
+        case 'phone':
+            inputProps.type = 'phone';
+            break;
+        default:
+            throw new Error('Unknown input type passed to <Input />.');
+    }
+
     return (
-        <div className="input">
+        <div className={`input ${animation}`}>
             <label htmlFor={id}>{label}</label>
             <input
                 autoComplete="on"
-                className=""
                 id={id}
                 name={name} // Used for setting values in state
-                pattern="[\p{L}\p{M}-]+" // https://www.regular-expressions.info/unicode.html (unicode categories)
                 placeholder={placeholder}
-                required
-                type="text"
+                required={isRequired}
                 value={value} // Value in text
+                {...inputProps}
+                onChange={onChange}
             />
         </div>
     );
 };
 
-const EmailInput = ({ id, label, name, placeholder, value }) => {
+const NewInfoButton = ({ onClick }) => {
     return (
-        <div className="input">
-            <label htmlFor={id}>{label}</label>
-            <input
-                autoComplete="on"
-                className=""
-                id={id}
-                name={name}
-                placeholder={placeholder}
-                required
-                type="email"
-                value={value}
-            />
-        </div>
+        <button className="button button--md new-info" onClick={onClick}>
+            <FontAwesomeIcon icon={faPlus} />
+            Add more information
+        </button>
     );
 };
 
-export { TextInput, EmailInput };
+export { Input, NewInfoButton };
