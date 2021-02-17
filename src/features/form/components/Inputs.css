@@ -29,4 +29,14 @@
 .new-info {
   background-color: inherit;
   color: var(--legend-desc-color);
+  /* 
+      Used to offset row-gap of .input-container.
+      row-gap size - margin-top size = offset
+      40px - 24px = 16px gap above 
+  */
+  margin-top: -2.4rem;
+}
+
+.new-info svg {
+  font-size: 0.75em;
 }
