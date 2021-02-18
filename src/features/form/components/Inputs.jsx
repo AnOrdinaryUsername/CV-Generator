@@ -17,8 +17,8 @@ const Input = ({ animation, id, isRequired, label, name, onChange, placeholder, 
         case 'email':
             inputProps.type = 'email';
             break;
-        case 'phone':
-            inputProps.type = 'phone';
+        case 'tel':
+            inputProps.type = 'tel';
             break;
         default:
             throw new Error('Unknown input type passed to <Input />.');

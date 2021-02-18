@@ -48,7 +48,7 @@ class Form extends Component {
                                 placeholder: 'e.g. enterprise6@email.com',
                             },
                             {
-                                type: 'phone',
+                                type: 'tel',
                                 label: 'Phone Number',
                                 id: 'phone-number',
                                 isRequired: true,
