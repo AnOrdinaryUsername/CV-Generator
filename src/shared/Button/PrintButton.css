@@ -19,8 +19,20 @@
   padding: 1.2rem 1.6rem;
 }
 
+.button--sm {
+  font-size: 0.875em;
+  padding: 0.8rem 1.4rem;
+}
+
 .print {
   background-color: hsl(244, 46%, 57%);
   color: hsl(0, 0%, 96%);
   margin-top: 3.6rem;
+}
+
+.delete {
+  background-color: hsl(226, 44%, 44%);
+  color: hsl(0, 0%, 96%);
+  place-self: end;
+  width: min-content;
 }
