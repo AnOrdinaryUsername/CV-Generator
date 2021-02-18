@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
-import uniqid from 'uniqid';
-import { Input, NewInfoButton } from '../components/Inputs';
+import { NewInfoButton } from '../components/Inputs';
 import './FormFieldset.css';
+import NewInputs from './NewInputs';
 
-const Inputs = ({ inputs, enableAnimation }) => {
-    return (
-        <div className="new-inputs">
-            {inputs.map((element, index) => {
-                // Show animation only when adding new inputs.
-                const animation = enableAnimation ? `text-anim-${index + 1}` : ``;
+// const Inputs = ({ inputs, enableAnimation }) => {
+//     return (
+//         <div className="new-inputs">
+//             {inputs.map((element, index) => {
+//                 // Show animation only when adding new inputs.
+//                 const animation = enableAnimation ? `text-anim-${index + 1}` : ``;
 
-                if (element.row) {
-                    return (
-                        <div className={`row ${animation}`} key={uniqid()}>
-                            {element.row.map((element) => {
-                                return <Input {...element} key={uniqid()} />;
-                            })}
-                        </div>
-                    );
-                }
+//                 if (element.row) {
+//                     return (
+//                         <div className={`row ${animation}`} key={uniqid()}>
+//                             {element.row.map((element) => {
+//                                 return <Input {...element} key={uniqid()} />;
+//                             })}
+//                         </div>
+//                     );
+//                 }
 
-                return <Input animation={animation} {...element} key={uniqid()} />;
-            })}
-        </div>
-    );
-};
+//                 return <Input animation={animation} {...element} key={uniqid()} />;
+//             })}
+//         </div>
+//     );
+// };
 
 class FormFieldset extends Component {
     constructor(props) {
@@ -40,7 +40,7 @@ class FormFieldset extends Component {
     addNewInfo(event) {
         event.preventDefault();
 
-        const inputs = <Inputs inputs={this.props.inputs} enableAnimation={true} />;
+        const inputs = <NewInputs inputs={this.props.inputs} enableAnimation={true} />;
         const newInfo = [...this.state.info, inputs];
         this.setState({
             info: newInfo,
@@ -53,7 +53,7 @@ class FormFieldset extends Component {
         // reason to add more personal info.
         const isPersonalFieldset = title === 'Personal Information';
 
-        const inputs = <Inputs inputs={this.props.inputs} enableAnimation={false} />;
+        const inputs = <NewInputs inputs={this.props.inputs} enableAnimation={false} />;
         const { info } = this.state;
 
         return (
