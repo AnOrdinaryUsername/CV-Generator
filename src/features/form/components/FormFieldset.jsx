@@ -40,7 +40,9 @@ class FormFieldset extends Component {
     addNewInfo(event) {
         event.preventDefault();
 
-        const inputs = <NewInputs inputs={this.props.inputs} enableAnimation={true} />;
+        const inputs = (
+            <NewInputs inputs={this.props.inputs} enableAnimation={true} includeDelete={true} />
+        );
         const newInfo = [...this.state.info, inputs];
         this.setState({
             info: newInfo,
@@ -53,7 +55,9 @@ class FormFieldset extends Component {
         // reason to add more personal info.
         const isPersonalFieldset = title === 'Personal Information';
 
-        const inputs = <NewInputs inputs={this.props.inputs} enableAnimation={false} />;
+        const inputs = (
+            <NewInputs inputs={this.props.inputs} enableAnimation={false} includeDelete={false} />
+        );
         const { info } = this.state;
 
         return (

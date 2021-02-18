@@ -22,7 +22,7 @@ class Inputs extends Component {
     }
 
     render() {
-        const { inputs, enableAnimation } = this.props;
+        const { inputs, enableAnimation, includeDelete } = this.props;
         const { isPresent } = this.state;
 
         return (
@@ -45,9 +45,14 @@ class Inputs extends Component {
 
                             return <Input animation={animation} {...element} key={uniqid()} />;
                         })}
-                        <button className="button button--sm delete" onClick={this.deleteNewInfo}>
-                            Delete
-                        </button>
+                        {includeDelete && (
+                            <button
+                                className="button button--sm delete"
+                                onClick={this.deleteNewInfo}
+                            >
+                                Delete
+                            </button>
+                        )}
                     </div>
                 )}
             </>
