@@ -212,6 +212,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+em {
+  font-style: italic;
+}
+
 h1,
 h2,
 h3,
@@ -250,6 +254,10 @@ main {
   margin-bottom: 5%;
 }
 
+strong {
+  font-weight: bold;
+}
+
 /*
 https://www.smashingmagazine.com/2015/01/designing-for-print-with-css/
 https://www.smashingmagazine.com/2011/11/how-to-set-up-a-print-style-sheet/
@@ -266,10 +274,4 @@ https://stackoverflow.com/a/15150779
     color-adjust: exact;
     -webkit-print-color-adjust: exact;
   }
-}
-
-#root {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
 }
