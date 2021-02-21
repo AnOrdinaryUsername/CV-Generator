@@ -2,10 +2,22 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import '../../../shared/Button/PrintButton.css';
+import CustomEditor from '../components/CustomEditor';
 import './Inputs.css';
 
 // isRequired, onChange, type
-const Input = ({ animation, id, isRequired, label, name, onChange, placeholder, type, value }) => {
+const Input = ({
+    animation,
+    id,
+    initialValue = '',
+    isRequired,
+    label,
+    name,
+    onChange,
+    placeholder,
+    type,
+    value,
+}) => {
     const inputProps = {};
 
     switch (type) {
@@ -20,13 +32,18 @@ const Input = ({ animation, id, isRequired, label, name, onChange, placeholder, 
         case 'tel':
             inputProps.type = 'tel';
             break;
+        // Custom Editor from react-quill
+        case 'editor':
+            break;
         default:
             throw new Error('Unknown input type passed to <Input />.');
     }
 
-    return (
-        <div className={`input ${animation}`}>
-            <label htmlFor={id}>{label}</label>
+    let input = null;
+    if (type === 'editor') {
+        input = <CustomEditor id={id} initialValue={initialValue} placeholder={placeholder} />;
+    } else {
+        input = (
             <input
                 autoComplete="on"
                 id={id}
@@ -37,6 +54,13 @@ const Input = ({ animation, id, isRequired, label, name, onChange, placeholder, 
                 {...inputProps}
                 onChange={onChange}
             />
+        );
+    }
+
+    return (
+        <div className={`input ${animation}`}>
+            <label htmlFor={id}>{label}</label>
+            {input}
         </div>
     );
 };
