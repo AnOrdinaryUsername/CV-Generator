@@ -1,6 +1,7 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import uniqid from 'uniqid';
 import '../../../shared/Button/PrintButton.css';
 import CustomEditor from '../components/CustomEditor';
 import './Inputs.css';
@@ -8,7 +9,6 @@ import './Inputs.css';
 // isRequired, onChange, type
 const Input = ({
     animation,
-    id,
     initialValue = '',
     isRequired,
     label,
@@ -40,6 +40,8 @@ const Input = ({
     }
 
     let input = null;
+    const id = uniqid();
+
     if (type === 'editor') {
         input = <CustomEditor id={id} initialValue={initialValue} placeholder={placeholder} />;
     } else {

@@ -22,7 +22,6 @@ class Form extends Component {
                             {
                                 type: 'text',
                                 label: 'First Name',
-                                id: 'first-name',
                                 isRequired: true,
                                 name: 'firstName',
                                 placeholder: 'e.g. Biggy',
@@ -30,7 +29,6 @@ class Form extends Component {
                             {
                                 type: 'text',
                                 label: 'Last Name',
-                                id: 'last-name',
                                 isRequired: true,
                                 name: 'lastName',
                                 placeholder: 'e.g. Enterprise',
@@ -42,7 +40,6 @@ class Form extends Component {
                             {
                                 type: 'email',
                                 label: 'Email address',
-                                id: 'email',
                                 isRequired: true,
                                 name: 'email',
                                 placeholder: 'e.g. enterprise6@email.com',
@@ -50,7 +47,7 @@ class Form extends Component {
                             {
                                 type: 'tel',
                                 label: 'Phone Number',
-                                id: 'phone-number',
+
                                 isRequired: true,
                                 name: 'phoneNumber',
                                 placeholder: 'e.g. (123) 456-7890',
@@ -60,7 +57,7 @@ class Form extends Component {
                     {
                         type: 'text',
                         label: 'Residence',
-                        id: 'residence',
+
                         isRequired: true,
                         name: 'residence',
                         placeholder: 'e.g. Newport News, US',
@@ -79,7 +76,6 @@ class Form extends Component {
                             {
                                 type: 'text',
                                 label: 'School Name',
-                                id: 'school-name',
                                 isRequired: false,
                                 name: 'schoolName',
                                 placeholder: 'e.g. Harvard University',
@@ -87,7 +83,6 @@ class Form extends Component {
                             {
                                 type: 'text',
                                 label: 'Field of Study',
-                                id: 'field-of-study',
                                 isRequired: false,
                                 name: 'fieldOfStudy',
                                 placeholder: 'e.g. Computer Science, B.S.',
@@ -97,7 +92,6 @@ class Form extends Component {
                     {
                         type: 'text',
                         label: 'Date',
-                        id: 'date',
                         isRequired: false,
                         name: 'date',
                         placeholder: 'e.g. 05/12/1938-02/17/1947',
@@ -105,7 +99,6 @@ class Form extends Component {
                     {
                         type: 'editor',
                         label: 'Details',
-                        id: 'education-details',
                         initialValue:
                             '<ul><li><strong>Current GPA</strong>: 4.0</li><li><strong>Projects</strong>: Facebook clone, Battleship</li></ul>',
                         placeholder:
@@ -125,7 +118,6 @@ class Form extends Component {
                             {
                                 type: 'text',
                                 label: 'Company Name',
-                                id: 'company-name',
                                 isRequired: false,
                                 name: 'companyName',
                                 placeholder: 'e.g. US Navy',
@@ -133,7 +125,6 @@ class Form extends Component {
                             {
                                 type: 'text',
                                 label: 'Job Title',
-                                id: 'job-title',
                                 isRequired: false,
                                 name: 'jobTitle',
                                 placeholder: 'e.g. Aircraft Carrier',
@@ -143,7 +134,6 @@ class Form extends Component {
                     {
                         type: 'text',
                         label: 'Date',
-                        id: 'date',
                         isRequired: false,
                         name: 'date',
                         placeholder: 'e.g. 05/12/1938-02/17/1947',
@@ -151,7 +141,6 @@ class Form extends Component {
                     {
                         type: 'editor',
                         label: 'Details',
-                        id: 'work-details',
                         initialValue:
                             '<ul><li>Coordinated movement of air wings at the Battle of Midway.</li></ul>',
                         placeholder:
