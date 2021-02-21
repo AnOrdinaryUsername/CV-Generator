@@ -102,6 +102,15 @@ class Form extends Component {
                         name: 'date',
                         placeholder: 'e.g. 05/12/1938-02/17/1947',
                     },
+                    {
+                        type: 'editor',
+                        label: 'Details',
+                        id: 'education-details',
+                        initialValue:
+                            '<ul><li><strong>Current GPA</strong>: 4.0</li><li><strong>Projects</strong>: Facebook clone, Battleship</li></ul>',
+                        placeholder:
+                            'List all descriptions of important academic achievements in bullet points.',
+                    },
                 ],
             },
             {
@@ -112,12 +121,41 @@ class Form extends Component {
                 },
                 inputs: [
                     {
+                        row: [
+                            {
+                                type: 'text',
+                                label: 'Company Name',
+                                id: 'company-name',
+                                isRequired: false,
+                                name: 'companyName',
+                                placeholder: 'e.g. US Navy',
+                            },
+                            {
+                                type: 'text',
+                                label: 'Job Title',
+                                id: 'job-title',
+                                isRequired: false,
+                                name: 'jobTitle',
+                                placeholder: 'e.g. Aircraft Carrier',
+                            },
+                        ],
+                    },
+                    {
                         type: 'text',
                         label: 'Date',
                         id: 'date',
                         isRequired: false,
                         name: 'date',
                         placeholder: 'e.g. 05/12/1938-02/17/1947',
+                    },
+                    {
+                        type: 'editor',
+                        label: 'Details',
+                        id: 'work-details',
+                        initialValue:
+                            '<ul><li>Coordinated movement of air wings at the Battle of Midway.</li></ul>',
+                        placeholder:
+                            'List all descriptions of applied skills and roles in bullet points.',
                     },
                 ],
             },

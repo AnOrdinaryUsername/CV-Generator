@@ -3,29 +3,6 @@ import { NewInfoButton } from '../components/Inputs';
 import './FormFieldset.css';
 import NewInputs from './NewInputs';
 
-// const Inputs = ({ inputs, enableAnimation }) => {
-//     return (
-//         <div className="new-inputs">
-//             {inputs.map((element, index) => {
-//                 // Show animation only when adding new inputs.
-//                 const animation = enableAnimation ? `text-anim-${index + 1}` : ``;
-
-//                 if (element.row) {
-//                     return (
-//                         <div className={`row ${animation}`} key={uniqid()}>
-//                             {element.row.map((element) => {
-//                                 return <Input {...element} key={uniqid()} />;
-//                             })}
-//                         </div>
-//                     );
-//                 }
-
-//                 return <Input animation={animation} {...element} key={uniqid()} />;
-//             })}
-//         </div>
-//     );
-// };
-
 class FormFieldset extends Component {
     constructor(props) {
         super(props);
@@ -55,6 +32,7 @@ class FormFieldset extends Component {
         // reason to add more personal info.
         const isPersonalFieldset = title === 'Personal Information';
 
+        // Initial inputs.
         const inputs = (
             <NewInputs inputs={this.props.inputs} enableAnimation={false} includeDelete={false} />
         );
