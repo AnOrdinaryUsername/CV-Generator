@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import uniqid from 'uniqid';
 import { NewInfoButton } from '../components/Inputs';
 import './FormFieldset.css';
 import NewInputs from './NewInputs';
@@ -18,7 +19,12 @@ class FormFieldset extends Component {
         event.preventDefault();
 
         const inputs = (
-            <NewInputs inputs={this.props.inputs} enableAnimation={true} includeDelete={true} />
+            <NewInputs
+                inputs={this.props.inputs}
+                enableAnimation={true}
+                includeDelete={true}
+                key={uniqid()}
+            />
         );
         const newInfo = [...this.state.info, inputs];
         this.setState({

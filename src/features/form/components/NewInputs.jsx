@@ -16,9 +16,11 @@ class Inputs extends Component {
     }
 
     deleteNewInfo() {
-        this.setState({
-            isPresent: !this.state.isPresent,
-        });
+        if (window.confirm('Are you sure you want to delete this item?')) {
+            this.setState({
+                isPresent: !this.state.isPresent,
+            });
+        }
     }
 
     render() {
@@ -47,7 +49,7 @@ class Inputs extends Component {
                         })}
                         {includeDelete && (
                             <button
-                                className="button button--sm delete"
+                                className="button button--sm delete text-anim-4"
                                 onClick={this.deleteNewInfo}
                             >
                                 Delete
