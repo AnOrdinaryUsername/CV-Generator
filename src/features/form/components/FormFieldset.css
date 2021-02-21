@@ -49,7 +49,6 @@ fieldset::after {
   display: grid;
   padding-left: 3.6rem;
   row-gap: 4rem;
-  width: 60%;
 }
 
 @media (max-width: 456px) {
