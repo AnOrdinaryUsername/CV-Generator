@@ -71,7 +71,7 @@ class Form extends Component {
                 legend: {
                     title: 'Education History',
                     description:
-                        'Having a degree shows an ability to learn. Although not required, you may include it if you wish to share.',
+                        'Having a degree demonstrates an ability to learn. Although not required, you may include it if you wish to share.',
                 },
                 inputs: [
                     {
@@ -117,7 +117,7 @@ class Form extends Component {
                 legend: {
                     title: 'Work Experience',
                     description:
-                        'Employers love practical experience. List all relevant work stuff.',
+                        'Employers love practical experience. Show them what skills you bring to the table.',
                 },
                 inputs: [
                     {
