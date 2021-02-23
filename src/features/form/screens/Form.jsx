@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import uniqid from 'uniqid';
-import PrintButton from '../../../shared/Button/PrintButton';
+import { SubmitButton } from '../../../shared/Buttons/Buttons';
 import FormFieldset from '../components/FormFieldset';
 import FormLayout from '../components/FormLayout';
 import './Form.css';
 
 class Form extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.formSection = [
             {
@@ -47,7 +46,6 @@ class Form extends Component {
                             {
                                 type: 'tel',
                                 label: 'Phone Number',
-
                                 isRequired: true,
                                 name: 'phoneNumber',
                                 placeholder: 'e.g. (123) 456-7890',
@@ -57,7 +55,6 @@ class Form extends Component {
                     {
                         type: 'text',
                         label: 'Residence',
-
                         isRequired: true,
                         name: 'residence',
                         placeholder: 'e.g. Newport News, US',
@@ -93,7 +90,7 @@ class Form extends Component {
                         type: 'text',
                         label: 'Date',
                         isRequired: false,
-                        name: 'date',
+                        name: 'educationDate',
                         placeholder: 'e.g. 05/12/1938-02/17/1947',
                     },
                     {
@@ -101,6 +98,7 @@ class Form extends Component {
                         label: 'Details',
                         initialValue:
                             '<ul><li><strong>Current GPA</strong>: 4.0</li><li><strong>Projects</strong>: Facebook clone, Battleship</li></ul>',
+                        name: 'educationEditor',
                         placeholder:
                             'List all descriptions of important academic achievements in bullet points.',
                     },
@@ -135,7 +133,7 @@ class Form extends Component {
                         type: 'text',
                         label: 'Date',
                         isRequired: false,
-                        name: 'date',
+                        name: 'workDate',
                         placeholder: 'e.g. 05/12/1938-02/17/1947',
                     },
                     {
@@ -143,6 +141,7 @@ class Form extends Component {
                         label: 'Details',
                         initialValue:
                             '<ul><li>Coordinated movement of air wings at the Battle of Midway.</li></ul>',
+                        name: 'workEditor',
                         placeholder:
                             'List all descriptions of applied skills and roles in bullet points.',
                     },
@@ -155,11 +154,17 @@ class Form extends Component {
 
     render() {
         return (
-            <FormLayout>
-                {this.formSection.map((fieldsetData) => {
-                    return <FormFieldset {...fieldsetData} key={uniqid()} />;
+            <FormLayout onSubmit={this.props.onSubmit}>
+                {this.formSection.map((fieldsetData, index) => {
+                    return (
+                        <FormFieldset
+                            {...fieldsetData}
+                            onChange={this.props.onChange}
+                            key={index}
+                        />
+                    );
                 })}
-                <PrintButton />
+                <SubmitButton />
             </FormLayout>
         );
     }
