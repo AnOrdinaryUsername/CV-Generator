@@ -1,8 +1,6 @@
 .text-editor {
   color: hsl(0, 0%, 30%);
   margin-top: 0.6rem;
-  overflow-wrap: break-word;
-  word-break: break-all;
 }
 
 /* Targeting the classes in 'react-quill/dist/quill.snow.css'. */
