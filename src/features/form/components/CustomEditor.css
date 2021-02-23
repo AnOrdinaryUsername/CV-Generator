@@ -1,6 +1,8 @@
 .text-editor {
   color: hsl(0, 0%, 30%);
   margin-top: 0.6rem;
+  overflow-wrap: break-word;
+  word-break: break-all;
 }
 
 /* Targeting the classes in 'react-quill/dist/quill.snow.css'. */
@@ -26,4 +28,8 @@
 .ql-toolbar.ql-snow {
   border: none;
   box-shadow: 0px 0px 2px 0px hsl(0deg 0% 7%);
+}
+
+.ql-editor ul {
+  padding-left: 0;
 }
