@@ -36,3 +36,12 @@
   place-self: end;
   width: min-content;
 }
+
+.submit {
+  /*background-color: hsl(175, 84%, 32%);*/
+  background-color: hsl(190, 56%, 78%);
+  color: hsl(225, 84%, 19%);
+  font-size: 1em;
+  margin-top: 3.6rem;
+  padding: 1.2rem 2.4rem;
+}
