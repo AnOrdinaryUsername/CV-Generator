@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import uniqid from 'uniqid';
-import '../../../shared/Button/PrintButton.css';
+import '../../../shared/Buttons/Buttons.css';
 import { Input } from '../components/Inputs';
 import './FormFieldset.css';
 
-class Inputs extends Component {
+class NewInputs extends Component {
     constructor(props) {
         super(props);
 
@@ -13,6 +12,7 @@ class Inputs extends Component {
         };
 
         this.deleteNewInfo = this.deleteNewInfo.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     deleteNewInfo() {
@@ -23,8 +23,13 @@ class Inputs extends Component {
         }
     }
 
+    handleInputChange(event) {
+        const { name, value } = event.target;
+        this.props.onChange(name, value);
+    }
+
     render() {
-        const { inputs, enableAnimation, includeDelete } = this.props;
+        const { inputs, enableAnimation, includeDelete, onChange } = this.props;
         const { isPresent } = this.state;
 
         return (
@@ -34,18 +39,32 @@ class Inputs extends Component {
                         {inputs.map((element, index) => {
                             // Show animation only when adding new inputs.
                             const animation = enableAnimation ? `text-anim-${index + 1}` : ``;
+                            const isEditor = element.type === 'editor';
 
                             if (element.row) {
                                 return (
-                                    <div className={`row ${animation}`} key={uniqid()}>
+                                    <div className={`row ${animation}`}>
                                         {element.row.map((element) => {
-                                            return <Input {...element} key={uniqid()} />;
+                                            return (
+                                                <Input
+                                                    {...element}
+                                                    onChange={
+                                                        isEditor ? onChange : this.handleInputChange
+                                                    }
+                                                />
+                                            );
                                         })}
                                     </div>
                                 );
                             }
 
-                            return <Input animation={animation} {...element} key={uniqid()} />;
+                            return (
+                                <Input
+                                    animation={animation}
+                                    {...element}
+                                    onChange={isEditor ? onChange : this.handleInputChange}
+                                />
+                            );
                         })}
                         {includeDelete && (
                             <button
@@ -62,4 +81,4 @@ class Inputs extends Component {
     }
 }
 
-export default Inputs;
+export default NewInputs;

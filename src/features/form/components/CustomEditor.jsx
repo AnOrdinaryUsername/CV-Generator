@@ -6,12 +6,24 @@ import './CustomEditor.css';
 class CustomEditor extends Component {
     constructor(props) {
         super(props);
-        this.state = { editorHtml: this.props.initialValue, theme: 'snow' };
-        this.handleChange = this.handleChange.bind(this);
+
+        this.state = {
+            editorHtml: this.props.initialValue,
+            theme: 'snow',
+        };
+
+        this.handleEditorChange = this.handleEditorChange.bind(this);
     }
 
-    handleChange(html) {
-        this.setState({ editorHtml: html }, () => console.log(this.state.editorHtml));
+    handleEditorChange(html) {
+        const { onChange, name } = this.props;
+
+        this.setState(
+            {
+                editorHtml: html,
+            },
+            () => onChange(name, this.state.editorHtml)
+        );
     }
 
     render() {
@@ -19,11 +31,11 @@ class CustomEditor extends Component {
             <div className="text-editor">
                 <ReactQuill
                     theme={this.state.theme}
-                    onChange={this.handleChange}
+                    onChange={this.handleEditorChange}
                     value={this.state.editorHtml}
                     modules={CustomEditor.modules}
                     formats={CustomEditor.formats}
-                    bounds={'.app'}
+                    bounds={'.text-editor'}
                     id={this.props.id}
                     placeholder={this.props.placeholder}
                 />
