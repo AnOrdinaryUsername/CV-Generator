@@ -1,18 +1,15 @@
 .input {
   display: flex;
   flex-direction: column;
+  /* Prevents Quill editor from overflowing */
   overflow: auto;
+  /* For shadows to appear due to overflow property above */
+  padding: 0 0.2rem 0.2rem 0.2rem;
 }
 
 @media (max-width: 768px) {
   .input {
     width: 100%;
-  }
-}
-
-@media (max-width: 456px) {
-  .input {
-    padding-left: 0;
   }
 }
 
