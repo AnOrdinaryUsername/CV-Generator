@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Form from '../features/form/screens/Form';
 import Header from '../features/navbar/screens/Header';
+import PDF from '../features/pdf/screens/PDF';
+import { DownloadButton } from '../shared/Buttons/Buttons';
 
 class App extends Component {
     constructor() {
@@ -29,7 +31,7 @@ class App extends Component {
     }
 
     render() {
-        const { isSubmitted } = this.state;
+        const { isSubmitted, personalFirstName, personalLastName } = this.state;
 
         return (
             <>
@@ -38,7 +40,15 @@ class App extends Component {
                     {!isSubmitted && (
                         <Form onSubmit={this.submitForm} onChange={this.handleFieldChange} />
                     )}
-                    {isSubmitted && <p>test</p>}
+                    {isSubmitted && (
+                        <>
+                            <PDF data={this.state} />
+                            <DownloadButton
+                                firstName={personalFirstName}
+                                lastName={personalLastName}
+                            />
+                        </>
+                    )}
                 </main>
             </>
         );
