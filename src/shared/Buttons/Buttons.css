@@ -37,7 +37,8 @@
   width: min-content;
 }
 
-.submit {
+.submit,
+.download {
   /*background-color: hsl(175, 84%, 32%);*/
   background-color: hsl(190, 56%, 78%);
   color: hsl(225, 84%, 19%);
