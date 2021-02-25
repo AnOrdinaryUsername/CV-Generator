@@ -1,7 +1,6 @@
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import uniqid from 'uniqid';
 import '../../../shared/Buttons/Buttons.css';
 import CustomEditor from '../components/CustomEditor';
 import './Inputs.css';
@@ -39,12 +38,11 @@ const Input = ({
     }
 
     let input = null;
-    const id = uniqid();
 
     if (type === 'editor') {
         input = (
             <CustomEditor
-                id={id}
+                id={name}
                 onChange={onChange}
                 initialValue={initialValue}
                 name={name}
@@ -55,7 +53,7 @@ const Input = ({
         input = (
             <input
                 autoComplete="on"
-                id={id}
+                id={name}
                 name={name} // Used for setting values in state
                 placeholder={placeholder}
                 required={isRequired}
@@ -67,8 +65,8 @@ const Input = ({
     }
 
     return (
-        <div className={`input ${animation}`}>
-            <label htmlFor={id}>{label}</label>
+        <div className={animation ? `input ${animation}` : 'input'}>
+            <label htmlFor={name}>{label}</label>
             {input}
         </div>
     );
