@@ -38,12 +38,13 @@ class NewInputs extends Component {
                     <div className="new-inputs">
                         {inputs.map((element, index) => {
                             // Show animation only when adding new inputs.
-                            const animation = enableAnimation ? `text-anim-${index + 1}` : ``;
+                            const rowStyle = enableAnimation ? `row text-anim-${index + 1}` : 'row';
+                            const singleStyle = enableAnimation ? `text-anim-${index + 1}` : null;
                             const isEditor = element.type === 'editor';
 
                             if (element.row) {
                                 return (
-                                    <div className={`row ${animation}`}>
+                                    <div className={rowStyle}>
                                         {element.row.map((element) => {
                                             return (
                                                 <Input
@@ -60,7 +61,7 @@ class NewInputs extends Component {
 
                             return (
                                 <Input
-                                    animation={animation}
+                                    animation={singleStyle}
                                     {...element}
                                     onChange={isEditor ? onChange : this.handleInputChange}
                                 />

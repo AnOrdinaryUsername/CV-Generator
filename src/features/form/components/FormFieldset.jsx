@@ -28,16 +28,16 @@ class FormFieldset extends Component {
 
         // Assign an index to each input's name attribute for differentiation.
         // Ex. name = 'schoolName0' for a newly added info input
-        newInputs.forEach((element) => {
+        newInputs.forEach((component) => {
             const index = this.state.info.length;
 
-            if (element.row) {
-                element.row.forEach((element) => {
-                    return (element.name = `${element.name}${index.toString()}`);
+            if (component.row) {
+                component.row.forEach((component) => {
+                    return (component.name = `${component.name}${index}`);
                 });
             }
 
-            return (element.name = `${element.name}${index.toString()}`);
+            return (component.name = `${component.name}${index}`);
         });
 
         const inputs = (
