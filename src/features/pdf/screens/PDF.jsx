@@ -1,39 +1,27 @@
+import { Document } from '@react-pdf/renderer';
 import React from 'react';
-import Layout from '../components/Layout';
-import PersonalInfo from '../components/PersonalInfo';
+import CV from '../components/CV';
 
 const PDF = ({ data }) => {
-    const personalInfo = {};
-    const educationHistory = {};
-    const workExperience = {};
-
-    const grabData = () => {
-        const userData = Object.entries(data);
-        // Removes the 'isSubmitted' property from array so all we have now is the user data.
-        const firstElement = userData.shift();
-
-        for (const [key, value] of userData) {
-            if (key.includes('personal')) {
-                personalInfo[key] = value;
-            } else if (key.includes('education')) {
-                educationHistory[key] = value;
-            } else if (key.includes('work')) {
-                workExperience[key] = value;
-            } else {
-                throw new Error(
-                    `Unknown property "${key}: ${value}" was passed.` +
-                        'Check Form.jsx if name contains personal, education, or work.'
-                );
-            }
-        }
-    };
-
-    grabData();
+    const { personalFirstName, personalLastName } = data;
+    const userName = `${personalFirstName} ${personalLastName}`;
 
     return (
-        <Layout>
-            <PersonalInfo userInfo={personalInfo} />
-        </Layout>
+        {
+            /* 
+            Basically just following this:
+            https://commonlook.com/the-relevance-of-metadata-in-accessible-pdfs/
+        */
+        },
+        (
+            <Document
+                author={`${userName}`}
+                subject={`Curriculum Vitae for ${userName}`}
+                title={`Curriculum Vitae for ${userName}`}
+            >
+                <CV userData={data} />
+            </Document>
+        )
     );
 };
 

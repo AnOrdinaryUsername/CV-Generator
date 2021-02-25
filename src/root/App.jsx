@@ -1,8 +1,8 @@
+import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
 import React, { Component } from 'react';
 import Form from '../features/form/screens/Form';
 import Header from '../features/navbar/screens/Header';
 import PDF from '../features/pdf/screens/PDF';
-import { DownloadButton } from '../shared/Buttons/Buttons';
 
 class App extends Component {
     constructor() {
@@ -32,6 +32,12 @@ class App extends Component {
 
     render() {
         const { isSubmitted, personalFirstName, personalLastName } = this.state;
+        const userName = `${personalFirstName}${personalLastName}CV`;
+
+        let UserPDF = null;
+        if (this.state.isSubmitted) {
+            UserPDF = <PDF data={this.state} />;
+        }
 
         return (
             <>
@@ -42,11 +48,14 @@ class App extends Component {
                     )}
                     {isSubmitted && (
                         <>
-                            <PDF data={this.state} />
-                            <DownloadButton
-                                firstName={personalFirstName}
-                                lastName={personalLastName}
-                            />
+                            <PDFViewer width={'100%'} height={'100%'}>
+                                {UserPDF}
+                            </PDFViewer>
+                            <PDFDownloadLink document={UserPDF} fileName={`${userName}.pdf`}>
+                                {({ blob, url, loading, error }) =>
+                                    loading ? 'Loading document...' : 'Download now!'
+                                }
+                            </PDFDownloadLink>
                         </>
                     )}
                 </main>
