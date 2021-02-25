@@ -258,6 +258,12 @@ strong {
   font-weight: bold;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 /*
 https://www.smashingmagazine.com/2015/01/designing-for-print-with-css/
 https://www.smashingmagazine.com/2011/11/how-to-set-up-a-print-style-sheet/
