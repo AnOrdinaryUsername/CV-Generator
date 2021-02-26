@@ -87,11 +87,22 @@ class Form extends Component {
                         ],
                     },
                     {
-                        type: 'text',
-                        label: 'Date',
-                        isRequired: false,
-                        name: 'educationDate',
-                        placeholder: 'e.g. 05/12/1938-02/17/1947',
+                        row: [
+                            {
+                                type: 'text',
+                                label: 'Location',
+                                isRequired: false,
+                                name: 'educationLocation',
+                                placeholder: 'e.g. Oahu, HI',
+                            },
+                            {
+                                type: 'text',
+                                label: 'Date',
+                                isRequired: false,
+                                name: 'educationDate',
+                                placeholder: 'e.g. May 1938 - Feb. 1947',
+                            },
+                        ],
                     },
                     {
                         type: 'editor',
@@ -130,11 +141,22 @@ class Form extends Component {
                         ],
                     },
                     {
-                        type: 'text',
-                        label: 'Date',
-                        isRequired: false,
-                        name: 'workDate',
-                        placeholder: 'e.g. 05/12/1938-02/17/1947',
+                        row: [
+                            {
+                                type: 'text',
+                                label: 'Location',
+                                isRequired: false,
+                                name: 'workLocation',
+                                placeholder: 'e.g. Oahu, HI',
+                            },
+                            {
+                                type: 'text',
+                                label: 'Date',
+                                isRequired: false,
+                                name: 'workDate',
+                                placeholder: 'e.g. May 1938 - Feb. 1947',
+                            },
+                        ],
                     },
                     {
                         type: 'editor',
