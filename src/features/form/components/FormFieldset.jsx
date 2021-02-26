@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import uniqid from 'uniqid';
 import { NewInfoButton } from '../components/Inputs';
 import './FormFieldset.css';
 import NewInputs from './NewInputs';
@@ -13,6 +12,7 @@ class FormFieldset extends Component {
         };
 
         this.addNewInfo = this.addNewInfo.bind(this);
+        this.updateNewInfoCount = this.updateNewInfoCount.bind(this);
     }
 
     addNewInfo(event) {
@@ -26,32 +26,26 @@ class FormFieldset extends Component {
          */
         const newInputs = JSON.parse(JSON.stringify(this.props.inputs));
 
-        // Assign an index to each input's name attribute for differentiation.
-        // Ex. name = 'schoolName0' for a newly added info input
-        newInputs.forEach((component) => {
-            const index = this.state.info.length;
+        const inputs = {
+            inputs: newInputs,
+            isPresent: true,
+            removeInputs: this.updateNewInfoCount,
+            enableAnimation: true,
+            includeDelete: true,
+            onChange: this.props.onChange,
+        };
 
-            if (component.row) {
-                component.row.forEach((component) => {
-                    return (component.name = `${component.name}${index}`);
-                });
-            }
-
-            return (component.name = `${component.name}${index}`);
-        });
-
-        const inputs = (
-            <NewInputs
-                inputs={newInputs}
-                enableAnimation={true}
-                includeDelete={true}
-                onChange={this.props.onChange}
-                key={uniqid()}
-            />
-        );
-        const newInfo = [...this.state.info, inputs];
         this.setState({
-            info: newInfo,
+            info: [...this.state.info, inputs],
+        });
+    }
+
+    updateNewInfoCount(index) {
+        const updatedInfo = [...this.state.info];
+        updatedInfo[index].isPresent = !updatedInfo[index].isPresent;
+
+        this.setState({
+            info: updatedInfo,
         });
     }
 
@@ -61,15 +55,25 @@ class FormFieldset extends Component {
         // reason to add more personal info.
         const isPersonalFieldset = title === 'Personal Information';
 
-        const initialInputs = (
+        const initialInfo = (
             <NewInputs
                 inputs={this.props.inputs}
+                isPresent={true}
                 enableAnimation={false}
                 includeDelete={false}
                 onChange={this.props.onChange}
             />
         );
+
         const { info } = this.state;
+        let newInfo = null;
+
+        if (info.length !== 0) {
+            const components = info.filter((component) => component.isPresent);
+            // Assign an index to each input's name attribute for differentiation.
+            // Ex. name = 'schoolName0' for a newly added info input
+            newInfo = components.map((props, indice) => <NewInputs {...props} index={indice} />);
+        }
 
         return (
             <fieldset>
@@ -78,8 +82,8 @@ class FormFieldset extends Component {
                     <p>{description}</p>
                 </legend>
                 <div className="input-container">
-                    {initialInputs}
-                    {info.length !== 0 && info.map((element) => element)}
+                    {initialInfo}
+                    {newInfo}
                     {!isPersonalFieldset && <NewInfoButton onClick={this.addNewInfo} />}
                 </div>
             </fieldset>

@@ -7,19 +7,16 @@ class NewInputs extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            isPresent: true,
-        };
-
-        this.deleteNewInfo = this.deleteNewInfo.bind(this);
+        this.confirmDeletion = this.confirmDeletion.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    deleteNewInfo() {
+    confirmDeletion(event) {
+        event.preventDefault();
+
         if (window.confirm('Are you sure you want to delete this item?')) {
-            this.setState({
-                isPresent: !this.state.isPresent,
-            });
+            const { index } = this.props;
+            this.props.removeInputs(index);
         }
     }
 
@@ -29,8 +26,7 @@ class NewInputs extends Component {
     }
 
     render() {
-        const { inputs, enableAnimation, includeDelete, onChange } = this.props;
-        const { isPresent } = this.state;
+        const { inputs, enableAnimation, includeDelete, onChange, isPresent } = this.props;
 
         return (
             <>
@@ -49,6 +45,7 @@ class NewInputs extends Component {
                                             return (
                                                 <Input
                                                     {...element}
+                                                    index={this.props.index}
                                                     onChange={
                                                         isEditor ? onChange : this.handleInputChange
                                                     }
@@ -62,6 +59,7 @@ class NewInputs extends Component {
                             return (
                                 <Input
                                     animation={singleStyle}
+                                    index={this.props.index}
                                     {...element}
                                     onChange={isEditor ? onChange : this.handleInputChange}
                                 />
@@ -70,7 +68,7 @@ class NewInputs extends Component {
                         {includeDelete && (
                             <button
                                 className="button button--sm delete text-anim-4"
-                                onClick={this.deleteNewInfo}
+                                onClick={this.confirmDeletion}
                             >
                                 Delete
                             </button>

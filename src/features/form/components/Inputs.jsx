@@ -7,6 +7,7 @@ import './Inputs.css';
 
 const Input = ({
     animation,
+    index,
     initialValue = '',
     isRequired,
     label,
@@ -20,8 +21,8 @@ const Input = ({
 
     switch (type) {
         case 'text':
-            // Allows all language characters.
-            inputProps.pattern = '^\\p{L}*$';
+            // Allows all language characters. \w allows whitespace
+            inputProps.pattern = '^[\\p{L} ]*$';
             inputProps.type = 'text';
             break;
         case 'email':
@@ -38,14 +39,15 @@ const Input = ({
     }
 
     let input = null;
+    let identifier = index !== undefined ? `${name}${index}` : name;
 
     if (type === 'editor') {
         input = (
             <CustomEditor
-                id={name}
+                id={identifier}
                 onChange={onChange}
                 initialValue={initialValue}
-                name={name}
+                name={identifier}
                 placeholder={placeholder}
             />
         );
@@ -53,8 +55,8 @@ const Input = ({
         input = (
             <input
                 autoComplete="on"
-                id={name}
-                name={name} // Used for setting values in state
+                id={identifier}
+                name={identifier} // Used for setting values in state
                 placeholder={placeholder}
                 required={isRequired}
                 value={value} // Value in text
@@ -66,7 +68,7 @@ const Input = ({
 
     return (
         <div className={animation ? `input ${animation}` : 'input'}>
-            <label htmlFor={name}>{label}</label>
+            <label htmlFor={identifier}>{label}</label>
             {input}
         </div>
     );
