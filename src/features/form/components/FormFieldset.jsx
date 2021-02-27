@@ -45,7 +45,7 @@ class FormFieldset extends Component {
         updatedInfo[index].isPresent = !updatedInfo[index].isPresent;
 
         this.setState({
-            info: updatedInfo,
+            info: updatedInfo.filter((component) => component.isPresent),
         });
     }
 
@@ -69,10 +69,9 @@ class FormFieldset extends Component {
         let newInfo = null;
 
         if (info.length !== 0) {
-            const components = info.filter((component) => component.isPresent);
             // Assign an index to each input's name attribute for differentiation.
             // Ex. name = 'schoolName0' for a newly added info input
-            newInfo = components.map((props, indice) => <NewInputs {...props} index={indice} />);
+            newInfo = info.map((props, indice) => <NewInputs {...props} index={indice} />);
         }
 
         return (
