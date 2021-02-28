@@ -22,14 +22,14 @@ class Form extends Component {
                                 type: 'text',
                                 label: 'First Name',
                                 isRequired: true,
-                                name: 'personalFirstName',
+                                name: 'firstName',
                                 placeholder: 'e.g. Biggy',
                             },
                             {
                                 type: 'text',
                                 label: 'Last Name',
                                 isRequired: true,
-                                name: 'personalLastName',
+                                name: 'lastName',
                                 placeholder: 'e.g. Enterprise',
                             },
                         ],
@@ -40,14 +40,14 @@ class Form extends Component {
                                 type: 'email',
                                 label: 'Email address',
                                 isRequired: true,
-                                name: 'personalEmail',
+                                name: 'email',
                                 placeholder: 'e.g. enterprise6@email.com',
                             },
                             {
                                 type: 'tel',
                                 label: 'Phone Number',
                                 isRequired: true,
-                                name: 'personalPhoneNumber',
+                                name: 'phoneNumber',
                                 placeholder: 'e.g. (123) 456-7890',
                             },
                         ],
@@ -56,7 +56,7 @@ class Form extends Component {
                         type: 'text',
                         label: 'Residence',
                         isRequired: true,
-                        name: 'personalResidence',
+                        name: 'residence',
                         placeholder: 'e.g. Newport News, US',
                     },
                 ],
@@ -74,14 +74,14 @@ class Form extends Component {
                                 type: 'text',
                                 label: 'School Name',
                                 isRequired: false,
-                                name: 'educationSchoolName',
+                                name: 'schoolName',
                                 placeholder: 'e.g. Harvard University',
                             },
                             {
                                 type: 'text',
                                 label: 'Field of Study',
                                 isRequired: false,
-                                name: 'educationFieldOfStudy',
+                                name: 'fieldOfStudy',
                                 placeholder: 'e.g. Computer Science, B.S.',
                             },
                         ],
@@ -92,14 +92,14 @@ class Form extends Component {
                                 type: 'text',
                                 label: 'Location',
                                 isRequired: false,
-                                name: 'educationLocation',
+                                name: 'location',
                                 placeholder: 'e.g. Oahu, HI',
                             },
                             {
                                 type: 'text',
                                 label: 'Date',
                                 isRequired: false,
-                                name: 'educationDate',
+                                name: 'date',
                                 placeholder: 'e.g. May 1938 - Feb. 1947',
                             },
                         ],
@@ -107,9 +107,7 @@ class Form extends Component {
                     {
                         type: 'editor',
                         label: 'Details',
-                        initialValue:
-                            '<ul><li><strong>Current GPA</strong>: 4.0</li><li><strong>Projects</strong>: Facebook clone, Battleship</li></ul>',
-                        name: 'educationEditor',
+                        name: 'editor',
                         placeholder:
                             'List all descriptions of important academic achievements in bullet points.',
                     },
@@ -128,14 +126,14 @@ class Form extends Component {
                                 type: 'text',
                                 label: 'Company Name',
                                 isRequired: false,
-                                name: 'workCompanyName',
+                                name: 'companyName',
                                 placeholder: 'e.g. US Navy',
                             },
                             {
                                 type: 'text',
                                 label: 'Job Title',
                                 isRequired: false,
-                                name: 'workJobTitle',
+                                name: 'jobTitle',
                                 placeholder: 'e.g. Aircraft Carrier',
                             },
                         ],
@@ -146,14 +144,14 @@ class Form extends Component {
                                 type: 'text',
                                 label: 'Location',
                                 isRequired: false,
-                                name: 'workLocation',
+                                name: 'location',
                                 placeholder: 'e.g. Oahu, HI',
                             },
                             {
                                 type: 'text',
                                 label: 'Date',
                                 isRequired: false,
-                                name: 'workDate',
+                                name: 'date',
                                 placeholder: 'e.g. May 1938 - Feb. 1947',
                             },
                         ],
@@ -161,27 +159,32 @@ class Form extends Component {
                     {
                         type: 'editor',
                         label: 'Details',
-                        initialValue:
-                            '<ul><li>Coordinated movement of air wings at the Battle of Midway.</li></ul>',
-                        name: 'workEditor',
+                        name: 'editor',
                         placeholder:
                             'List all descriptions of applied skills and roles in bullet points.',
                     },
                 ],
             },
         ];
-
-        this.state = {};
     }
 
     render() {
+        // Passed App state.
+        const { personal, education, work } = this.props.storedInputs;
+        // Arrays with object data
+        const data = [personal, education, work];
+        const sectionName = ['personal', 'education', 'work'];
+
         return (
             <FormLayout onSubmit={this.props.onSubmit}>
                 {this.formSection.map((fieldsetData, index) => {
                     return (
                         <FormFieldset
                             {...fieldsetData}
+                            storedInputs={data[index]}
+                            sectionName={sectionName[index]}
                             onChange={this.props.onChange}
+                            updateInputCount={this.props.updateInputCount}
                             key={index}
                         />
                     );
