@@ -1,6 +1,28 @@
-import { Document } from '@react-pdf/renderer';
+import { Document, Font } from '@react-pdf/renderer';
 import React from 'react';
 import CV from '../components/CV';
+import cormorantBold from '../components/fonts/CormorantGaramond-Bold.ttf';
+import cormorantReg from '../components/fonts/CormorantGaramond-Regular.ttf';
+import unicodeChar from '../components/fonts/DejaVu-Sans.Book.ttf';
+
+// Just for this character "❖"
+Font.register({
+    family: 'DejaVu Sans',
+    format: 'TrueType',
+    src: unicodeChar,
+});
+
+Font.register({
+    family: 'Cormorant Garamond Bold',
+    format: 'TrueType',
+    src: cormorantBold,
+});
+
+Font.register({
+    family: 'Cormorant Garamond Regular',
+    format: 'TrueType',
+    src: cormorantReg,
+});
 
 const PDF = ({ data }) => {
     const { personalFirstName, personalLastName } = data;
