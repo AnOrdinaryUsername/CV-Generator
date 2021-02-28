@@ -25,15 +25,19 @@ class FormFieldset extends Component {
          * https://stackoverflow.com/a/23481096
          */
         const newInputs = JSON.parse(JSON.stringify(this.props.inputs));
+        const { sectionName, onChange } = this.props;
 
         const inputs = {
             inputs: newInputs,
+            sectionName: sectionName,
             isPresent: true,
             removeInputs: this.updateNewInfoCount,
             enableAnimation: true,
             includeDelete: true,
-            onChange: this.props.onChange,
+            onChange: onChange,
         };
+
+        this.props.updateInputCount(sectionName, this.state.info.length);
 
         this.setState({
             info: [...this.state.info, inputs],
@@ -44,6 +48,7 @@ class FormFieldset extends Component {
         const updatedInfo = [...this.state.info];
         updatedInfo[index].isPresent = !updatedInfo[index].isPresent;
 
+        // TODO: Update in App state by filtering and pass a callback to here.
         this.setState({
             info: updatedInfo.filter((component) => component.isPresent),
         });
@@ -58,6 +63,9 @@ class FormFieldset extends Component {
         const initialInfo = (
             <NewInputs
                 inputs={this.props.inputs}
+                // Passed state
+                storedInputs={this.props.storedInputs[0]} // array and use index to access storedInputs
+                sectionName={this.props.sectionName}
                 isPresent={true}
                 enableAnimation={false}
                 includeDelete={false}
@@ -69,9 +77,21 @@ class FormFieldset extends Component {
         let newInfo = null;
 
         if (info.length !== 0) {
-            // Assign an index to each input's name attribute for differentiation.
-            // Ex. name = 'schoolName0' for a newly added info input
-            newInfo = info.map((props, indice) => <NewInputs {...props} index={indice} />);
+            newInfo = info.map((props, indice) => {
+                // index is used as an identifier for newly add inputs
+                // storedInputs begin at 1 since initialInfo (name with no identifier) begins at 0
+                const NEW_INFO_START = 1;
+                const start = indice + NEW_INFO_START;
+                return (
+                    <NewInputs
+                        {...props}
+                        // Assign an index to each input's name attribute for differentiation.
+                        // Ex. name = 'schoolName0' for a newly added info input
+                        index={indice}
+                        storedInputs={this.props.storedInputs[start]}
+                    />
+                );
+            });
         }
 
         return (

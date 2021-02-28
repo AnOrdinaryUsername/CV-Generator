@@ -22,7 +22,7 @@ class NewInputs extends Component {
 
     handleInputChange(event) {
         const { name, value } = event.target;
-        this.props.onChange(name, value);
+        this.props.onChange(this.props.sectionName, name, value);
     }
 
     render() {
@@ -41,10 +41,11 @@ class NewInputs extends Component {
                             if (element.row) {
                                 return (
                                     <div className={rowStyle}>
-                                        {element.row.map((element) => {
+                                        {element.row.map((props) => {
                                             return (
                                                 <Input
-                                                    {...element}
+                                                    {...props}
+                                                    value={this.props.storedInputs}
                                                     index={this.props.index}
                                                     onChange={
                                                         isEditor ? onChange : this.handleInputChange
@@ -59,7 +60,10 @@ class NewInputs extends Component {
                             return (
                                 <Input
                                     animation={singleStyle}
+                                    value={this.props.storedInputs}
                                     index={this.props.index}
+                                    // For CustomEditor
+                                    sectionName={this.props.sectionName}
                                     {...element}
                                     onChange={isEditor ? onChange : this.handleInputChange}
                                 />

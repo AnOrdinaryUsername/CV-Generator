@@ -8,12 +8,12 @@ import './Inputs.css';
 const Input = ({
     animation,
     index,
-    initialValue = '',
     isRequired,
     label,
     name,
     onChange,
     placeholder,
+    sectionName,
     type,
     value,
 }) => {
@@ -46,9 +46,10 @@ const Input = ({
             <CustomEditor
                 id={identifier}
                 onChange={onChange}
-                initialValue={initialValue}
+                value={value[identifier]}
                 name={identifier}
                 placeholder={placeholder}
+                sectionName={sectionName}
             />
         );
     } else {
@@ -59,7 +60,7 @@ const Input = ({
                 name={identifier} // Used for setting values in state
                 placeholder={placeholder}
                 required={isRequired}
-                value={value} // Value in text
+                value={value[identifier]} // Value in text
                 {...inputProps}
                 onChange={onChange}
             />
