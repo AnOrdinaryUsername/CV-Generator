@@ -37,7 +37,7 @@ const PersonalInfo = ({ userInfo }) => {
     const blackDiamond = String.fromCharCode(0x2756);
 
     return (
-        <View style={styles.section} debug={true}>
+        <View style={styles.section}>
             <Text style={styles.name}>{`${firstName} ${lastName}`}</Text>
             <View style={styles.details}>
                 <Text>{email}</Text>

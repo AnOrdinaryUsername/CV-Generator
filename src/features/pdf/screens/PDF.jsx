@@ -25,8 +25,8 @@ Font.register({
 });
 
 const PDF = ({ data }) => {
-    const { personalFirstName, personalLastName } = data;
-    const userName = `${personalFirstName} ${personalLastName}`;
+    const { firstName, lastName } = data.personal[0];
+    const userName = `${firstName} ${lastName}`;
 
     return (
         {

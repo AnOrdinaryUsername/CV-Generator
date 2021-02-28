@@ -12,10 +12,10 @@ const styles = StyleSheet.create({
     },
 });
 
-const CV = ({ personal, education, work }) => {
+const CV = ({ userData }) => {
     return (
         <Page style={styles.page}>
-            <PersonalInfo userInfo={personal} />
+            <PersonalInfo userInfo={userData.personal[0]} />
         </Page>
     );
 };
