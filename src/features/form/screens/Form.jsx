@@ -8,6 +8,7 @@ class Form extends Component {
     constructor(props) {
         super(props);
 
+        // Template for inputs.
         this.formSection = [
             {
                 legend: {
@@ -24,6 +25,7 @@ class Form extends Component {
                                 isRequired: true,
                                 name: 'firstName',
                                 placeholder: 'e.g. Biggy',
+                                autoComplete: 'given-name',
                             },
                             {
                                 type: 'text',
@@ -31,6 +33,7 @@ class Form extends Component {
                                 isRequired: true,
                                 name: 'lastName',
                                 placeholder: 'e.g. Enterprise',
+                                autoComplete: 'family-name',
                             },
                         ],
                     },
@@ -42,6 +45,7 @@ class Form extends Component {
                                 isRequired: true,
                                 name: 'email',
                                 placeholder: 'e.g. enterprise6@email.com',
+                                autoComplete: 'email',
                             },
                             {
                                 type: 'tel',
@@ -49,6 +53,7 @@ class Form extends Component {
                                 isRequired: true,
                                 name: 'phoneNumber',
                                 placeholder: 'e.g. (123) 456-7890',
+                                autoComplete: 'tel',
                             },
                         ],
                     },
@@ -58,6 +63,7 @@ class Form extends Component {
                         isRequired: true,
                         name: 'residence',
                         placeholder: 'e.g. Newport News, US',
+                        autoComplete: 'country-name',
                     },
                 ],
             },
@@ -184,7 +190,8 @@ class Form extends Component {
                             storedInputs={data[index]}
                             sectionName={sectionName[index]}
                             onChange={this.props.onChange}
-                            updateInputCount={this.props.updateInputCount}
+                            addNewInput={this.props.addNewInput}
+                            removeNewInput={this.props.removeNewInput}
                             key={index}
                         />
                     );
