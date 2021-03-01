@@ -15,16 +15,44 @@ class FormFieldset extends Component {
         this.updateNewInfoCount = this.updateNewInfoCount.bind(this);
     }
 
+    // Could've been done in the constructor but there's a lot of code.
+    componentDidMount() {
+        let newInputs = [];
+        const { storedInputs } = this.props;
+        const INITIAL_INPUT_LENGTH = 1;
+
+        if (storedInputs.length > INITIAL_INPUT_LENGTH) {
+            // Deep clone so we don't delete the first element in passed state.
+            const propsState = JSON.parse(JSON.stringify(storedInputs));
+            // No need to have initial values in. Only new inputs.
+            propsState.shift();
+
+            const { inputs, onChange, sectionName } = this.props;
+
+            propsState.forEach(() => {
+                const additionalInputs = {
+                    inputs: inputs,
+                    sectionName: sectionName,
+                    isPresent: true,
+                    removeInputs: this.updateNewInfoCount,
+                    enableAnimation: true,
+                    includeDelete: true,
+                    onChange: onChange,
+                };
+
+                newInputs.push(additionalInputs);
+            });
+
+            this.setState({
+                info: [...newInputs],
+            });
+        }
+    }
+
     addNewInfo(event) {
         event.preventDefault();
 
-        /*
-         * Deep clone an array so that newInputs doesn't refer to the same props.inputs from Form.jsx.
-         * The inputs data only contains strings so it's okay in this case.
-         * https://stackoverflow.com/a/122704
-         * https://stackoverflow.com/a/23481096
-         */
-        const newInputs = JSON.parse(JSON.stringify(this.props.inputs));
+        const newInputs = this.props.inputs;
         const { sectionName, onChange } = this.props;
 
         const inputs = {
@@ -37,7 +65,7 @@ class FormFieldset extends Component {
             onChange: onChange,
         };
 
-        this.props.updateInputCount(sectionName, this.state.info.length);
+        this.props.addNewInput(sectionName, this.state.info.length);
 
         this.setState({
             info: [...this.state.info, inputs],
@@ -48,10 +76,15 @@ class FormFieldset extends Component {
         const updatedInfo = [...this.state.info];
         updatedInfo[index].isPresent = !updatedInfo[index].isPresent;
 
-        // TODO: Update in App state by filtering and pass a callback to here.
-        this.setState({
-            info: updatedInfo.filter((component) => component.isPresent),
-        });
+        this.setState(
+            {
+                info: updatedInfo.filter((component) => component.isPresent),
+            },
+            () => {
+                const { removeNewInput, sectionName } = this.props;
+                removeNewInput(sectionName);
+            }
+        );
     }
 
     render() {
