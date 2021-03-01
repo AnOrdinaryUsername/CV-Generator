@@ -6,19 +6,12 @@ import PDF from '../features/pdf/screens/PDF';
 
 // object => object literal
 // prop => string (the property inside the object literal)
-// return boolean
+// return => boolean
 const objectHasProperty = (object, prop) => ({}.propertyIsEnumerable.call(object, prop));
 
 class App extends Component {
     constructor() {
         super();
-
-        let storage = null;
-        if (localStorage) {
-            storage = { ...localStorage };
-            // No need to store color theme in App state.
-            delete storage['theme'];
-        }
 
         this.state = {
             isSubmitted: false,
@@ -55,10 +48,20 @@ class App extends Component {
 
         this.submitForm = this.submitForm.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
-        this.updateInputCount = this.updateInputCount.bind(this);
+        this.addNewInput = this.addNewInput.bind(this);
+        this.removeNewInput = this.removeNewInput.bind(this);
     }
 
-    updateInputCount(sectionName, index) {
+    componentDidMount() {
+        let storage = null;
+        if (localStorage) {
+            storage = { ...localStorage };
+            // No need to store color theme in App state.
+            delete storage['theme'];
+        }
+    }
+
+    addNewInput(sectionName, index) {
         switch (sectionName) {
             case 'education': {
                 const schoolName = `schoolName${index}`;
@@ -114,6 +117,42 @@ class App extends Component {
         }
     }
 
+    removeNewInput(sectionName) {
+        switch (sectionName) {
+            case 'education':
+                const newEducation = [...this.state.education];
+                /*  It's a pop operation since the order stays the same and
+                 *   we only need to remove the newest input.
+                 *
+                 *   This is due to the fact that the map() on the line 133 in FormFieldset.jsx
+                 *   passes an index to access App state.
+                 */
+                newEducation.pop();
+
+                this.setState((prevState) => ({
+                    ...prevState,
+                    education: newEducation,
+                }));
+                break;
+
+            case 'work':
+                const newWork = [...this.state.work];
+                newWork.pop();
+
+                this.setState((prevState) => ({
+                    ...prevState,
+                    work: newWork,
+                }));
+                break;
+
+            default:
+                throw new Error(
+                    `Unexpected section name '${sectionName}' was passed.` +
+                        "Only valid names are 'work' and 'education'."
+                );
+        }
+    }
+
     submitForm() {
         this.setState({
             isSubmitted: !this.state.isSubmitted,
@@ -139,6 +178,7 @@ class App extends Component {
                     }
                 );
                 break;
+
             case 'education':
                 this.setState(
                     (prevState) => ({
@@ -153,6 +193,7 @@ class App extends Component {
                     }
                 );
                 break;
+
             case 'work':
                 this.setState(
                     (prevState) => ({
@@ -167,6 +208,7 @@ class App extends Component {
                     }
                 );
                 break;
+
             default:
                 throw new Error(
                     `Unexpected section name '${sectionName}' was passed.` +
@@ -176,8 +218,8 @@ class App extends Component {
     }
 
     render() {
-        const { isSubmitted, personalFirstName, personalLastName } = this.state;
-        const userName = `${personalFirstName}${personalLastName}CV`;
+        const { isSubmitted, personal } = this.state;
+        const userName = `${personal[0].firstName}${personal[0].lastName}CV`;
 
         let UserPDF = null;
         if (this.state.isSubmitted) {
@@ -192,7 +234,8 @@ class App extends Component {
                         <Form
                             onSubmit={this.submitForm}
                             onChange={this.handleFieldChange}
-                            updateInputCount={this.updateInputCount}
+                            addNewInput={this.addNewInput}
+                            removeNewInput={this.removeNewInput}
                             storedInputs={this.state}
                         />
                     )}
