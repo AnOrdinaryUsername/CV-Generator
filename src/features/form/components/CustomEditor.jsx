@@ -8,7 +8,6 @@ class CustomEditor extends Component {
         super(props);
 
         this.state = {
-            editorHtml: this.props.value,
             theme: 'snow',
         };
 
@@ -18,12 +17,7 @@ class CustomEditor extends Component {
     handleEditorChange(html) {
         const { onChange, name, sectionName } = this.props;
 
-        this.setState(
-            {
-                editorHtml: html,
-            },
-            () => onChange(sectionName, name, this.state.editorHtml)
-        );
+        onChange(sectionName, name, html);
     }
 
     render() {
@@ -32,7 +26,7 @@ class CustomEditor extends Component {
                 <ReactQuill
                     theme={this.state.theme}
                     onChange={this.handleEditorChange}
-                    value={this.state.editorHtml || ''}
+                    value={this.props.value}
                     modules={CustomEditor.modules}
                     formats={CustomEditor.formats}
                     bounds={'.text-editor'}
