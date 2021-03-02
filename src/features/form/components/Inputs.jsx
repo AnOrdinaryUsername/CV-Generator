@@ -7,6 +7,7 @@ import './Inputs.css';
 
 const Input = ({
     animation,
+    autoComplete,
     index,
     isRequired,
     label,
@@ -22,7 +23,7 @@ const Input = ({
     switch (type) {
         case 'text':
             // Allows all language characters. \w allows whitespace
-            inputProps.pattern = '^[\\p{L} ]*$';
+            inputProps.pattern = '^[\\p{L}\\p{M}, ]*$';
             inputProps.type = 'text';
             break;
         case 'email':
@@ -35,7 +36,7 @@ const Input = ({
         case 'editor':
             break;
         default:
-            throw new Error('Unknown input type passed to <Input />.');
+            throw new Error(`Unknown input type ${type} passed to <Input />.`);
     }
 
     let input = null;
@@ -55,7 +56,7 @@ const Input = ({
     } else {
         input = (
             <input
-                autoComplete="on"
+                autoComplete={autoComplete || 'off'}
                 id={identifier}
                 name={identifier} // Used for setting values in state
                 placeholder={placeholder}
