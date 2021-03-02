@@ -74,6 +74,7 @@ class FormFieldset extends Component {
 
     updateNewInfoCount(index) {
         const updatedInfo = [...this.state.info];
+        const NEW_INPUT_START = index + 1;
         updatedInfo[index].isPresent = !updatedInfo[index].isPresent;
 
         this.setState(
@@ -82,7 +83,7 @@ class FormFieldset extends Component {
             },
             () => {
                 const { removeNewInput, sectionName } = this.props;
-                removeNewInput(sectionName);
+                removeNewInput(sectionName, NEW_INPUT_START);
             }
         );
     }
