@@ -35,6 +35,12 @@ class Header extends Component {
             isLightTheme: detectColorTheme,
         };
 
+        if (this.state.isLightTheme) {
+            localStorage.setItem('theme', 'light');
+        } else {
+            localStorage.setItem('theme', 'dark');
+        }
+
         this.changeTheme = this.changeTheme.bind(this);
     }
 
