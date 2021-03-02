@@ -9,11 +9,18 @@ import PDF from '../features/pdf/screens/PDF';
 // return => boolean
 const objectHasProperty = (object, prop) => ({}.propertyIsEnumerable.call(object, prop));
 
+// Just to assign multiple variables a single value easily.
+function* repeat(value) {
+    while (true) {
+        yield value;
+    }
+}
+
 class App extends Component {
     constructor() {
         super();
 
-        this.state = {
+        const template = {
             isSubmitted: false,
             personal: [
                 {
@@ -46,19 +53,38 @@ class App extends Component {
             ],
         };
 
+        let [storage, personal, education, work] = repeat(null);
+
+        storage = { ...localStorage };
+        // No need to store color theme in App state.
+        delete storage['theme'];
+
+        const checkStorage = (storageItem) => {
+            const item = localStorage.getItem(storageItem);
+
+            if (item) {
+                return JSON.parse(item);
+            }
+
+            return template[storageItem];
+        };
+
+        personal = checkStorage('personal');
+        education = checkStorage('education');
+        work = checkStorage('work');
+
+        this.state = {
+            isSubmitted: false,
+            personal: [...personal],
+            education: [...education],
+            work: [...work],
+        };
+
         this.submitForm = this.submitForm.bind(this);
+        this.resetForm = this.resetForm.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.addNewInput = this.addNewInput.bind(this);
         this.removeNewInput = this.removeNewInput.bind(this);
-    }
-
-    componentDidMount() {
-        let storage = null;
-        if (localStorage) {
-            storage = { ...localStorage };
-            // No need to store color theme in App state.
-            delete storage['theme'];
-        }
     }
 
     addNewInput(sectionName, index) {
@@ -70,20 +96,25 @@ class App extends Component {
                 const date = `date${index}`;
                 const editor = `editor${index}`;
 
-                this.setState((prevState) => ({
-                    ...prevState,
-                    education: [
-                        ...prevState.education,
-                        {
-                            [schoolName]: '',
-                            [fieldOfStudy]: '',
-                            [location]: '',
-                            [date]: '',
-                            [editor]:
-                                '<ul><li><strong>Current GPA</strong>: 4.0</li><li><strong>Projects</strong>: Facebook clone, Battleship</li></ul>',
-                        },
-                    ],
-                }));
+                this.setState(
+                    (prevState) => ({
+                        ...prevState,
+                        education: [
+                            ...prevState.education,
+                            {
+                                [schoolName]: '',
+                                [fieldOfStudy]: '',
+                                [location]: '',
+                                [date]: '',
+                                [editor]:
+                                    '<ul><li><strong>Current GPA</strong>: 4.0</li><li><strong>Projects</strong>: Facebook clone, Battleship</li></ul>',
+                            },
+                        ],
+                    }),
+                    () => {
+                        localStorage.setItem(sectionName, JSON.stringify(this.state.education));
+                    }
+                );
                 break;
             }
             case 'work': {
@@ -93,20 +124,25 @@ class App extends Component {
                 const date = `date${index}`;
                 const editor = `editor${index}`;
 
-                this.setState((prevState) => ({
-                    ...prevState,
-                    work: [
-                        ...prevState.work,
-                        {
-                            [companyName]: '',
-                            [jobTitle]: '',
-                            [location]: '',
-                            [date]: '',
-                            [editor]:
-                                '<ul><li>Coordinated movement of air wings at the Battle of Midway.</li></ul>',
-                        },
-                    ],
-                }));
+                this.setState(
+                    (prevState) => ({
+                        ...prevState,
+                        work: [
+                            ...prevState.work,
+                            {
+                                [companyName]: '',
+                                [jobTitle]: '',
+                                [location]: '',
+                                [date]: '',
+                                [editor]:
+                                    '<ul><li>Coordinated movement of air wings at the Battle of Midway.</li></ul>',
+                            },
+                        ],
+                    }),
+                    () => {
+                        localStorage.setItem(sectionName, JSON.stringify(this.state.work));
+                    }
+                );
                 break;
             }
             default:
@@ -117,10 +153,42 @@ class App extends Component {
         }
     }
 
-    removeNewInput(sectionName) {
+    removeNewInput(sectionName, index) {
+        // original => The object to copy the values to
+        // valueObject => The object passing the values
+        // Note: Both objects have to be the same length.
+        const copyValues = (original, valueObject) => {
+            const objectToCopyValueTo = Object.entries(original);
+            const objectToCopyFrom = Object.values(valueObject);
+
+            objectToCopyValueTo.forEach((element, index) => {
+                const value = 1;
+                element[value] = objectToCopyFrom[index];
+            });
+
+            const copiedObject = objectToCopyValueTo.reduce((accum, [k, v]) => {
+                accum[k] = v;
+                return accum;
+            }, {});
+
+            return copiedObject;
+        };
+
         switch (sectionName) {
             case 'education':
                 const newEducation = [...this.state.education];
+
+                for (let i = index; i < newEducation.length; ++i) {
+                    const start = i + 1;
+
+                    if (start >= newEducation.length) {
+                        break;
+                    }
+
+                    const copiedObject = copyValues(newEducation[i], newEducation[start]);
+                    newEducation[i] = copiedObject;
+                }
+
                 /*  It's a pop operation since the order stays the same and
                  *   we only need to remove the newest input.
                  *
@@ -129,20 +197,42 @@ class App extends Component {
                  */
                 newEducation.pop();
 
-                this.setState((prevState) => ({
-                    ...prevState,
-                    education: newEducation,
-                }));
+                this.setState(
+                    (prevState) => ({
+                        ...prevState,
+                        education: newEducation,
+                    }),
+                    () => {
+                        localStorage.setItem(sectionName, JSON.stringify(this.state.education));
+                    }
+                );
                 break;
 
             case 'work':
                 const newWork = [...this.state.work];
+
+                for (let i = index; i < newWork.length; ++i) {
+                    const start = i + 1;
+
+                    if (start >= newWork.length) {
+                        break;
+                    }
+
+                    const copiedObject = copyValues(newWork[i], newWork[start]);
+                    newWork[i] = copiedObject;
+                }
+
                 newWork.pop();
 
-                this.setState((prevState) => ({
-                    ...prevState,
-                    work: newWork,
-                }));
+                this.setState(
+                    (prevState) => ({
+                        ...prevState,
+                        work: newWork,
+                    }),
+                    () => {
+                        localStorage.setItem(sectionName, JSON.stringify(this.state.work));
+                    }
+                );
                 break;
 
             default:
@@ -151,12 +241,6 @@ class App extends Component {
                         "Only valid names are 'work' and 'education'."
                 );
         }
-    }
-
-    submitForm() {
-        this.setState({
-            isSubmitted: !this.state.isSubmitted,
-        });
     }
 
     // Callback used in 'handleChange()' in NewInputs.jsx + CustomEditor.jsx
@@ -174,7 +258,7 @@ class App extends Component {
                         ],
                     }),
                     () => {
-                        localStorage.setItem(name, value);
+                        localStorage.setItem(sectionName, JSON.stringify(this.state.personal));
                     }
                 );
                 break;
@@ -189,7 +273,7 @@ class App extends Component {
                         }),
                     }),
                     () => {
-                        localStorage.setItem(name, value);
+                        localStorage.setItem(sectionName, JSON.stringify(this.state.education));
                     }
                 );
                 break;
@@ -204,7 +288,7 @@ class App extends Component {
                         }),
                     }),
                     () => {
-                        localStorage.setItem(name, value);
+                        localStorage.setItem(sectionName, JSON.stringify(this.state.work));
                     }
                 );
                 break;
@@ -215,6 +299,53 @@ class App extends Component {
                         "Only valid names are 'personal', 'work' and 'education'."
                 );
         }
+    }
+
+    resetForm(event) {
+        event.preventDefault();
+
+        if (window.confirm('Are you sure you want to clear the form?')) {
+            localStorage.clear();
+
+            this.setState({
+                isSubmitted: false,
+                personal: [
+                    {
+                        firstName: '',
+                        lastName: '',
+                        email: '',
+                        phoneNumber: '',
+                        residence: '',
+                    },
+                ],
+                education: [
+                    {
+                        schoolName: '',
+                        fieldOfStudy: '',
+                        location: '',
+                        date: '',
+                        editor:
+                            '<ul><li><strong>Current GPA</strong>: 4.0</li><li><strong>Projects</strong>: Facebook clone, Battleship</li></ul>',
+                    },
+                ],
+                work: [
+                    {
+                        companyName: '',
+                        jobTitle: '',
+                        location: '',
+                        date: '',
+                        editor:
+                            '<ul><li>Coordinated movement of air wings at the Battle of Midway.</li></ul>',
+                    },
+                ],
+            });
+        }
+    }
+
+    submitForm() {
+        this.setState({
+            isSubmitted: !this.state.isSubmitted,
+        });
     }
 
     render() {
@@ -236,6 +367,7 @@ class App extends Component {
                             onChange={this.handleFieldChange}
                             addNewInput={this.addNewInput}
                             removeNewInput={this.removeNewInput}
+                            resetForm={this.resetForm}
                             storedInputs={this.state}
                         />
                     )}
