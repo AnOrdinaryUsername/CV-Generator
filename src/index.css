@@ -166,6 +166,12 @@ table {
   --form-shadow-color: hsl(220deg 7% 83%);
   --legend-desc-color: hsl(194, 67%, 27%);
   --fieldset-line-color: hsla(0, 0%, 26%, 0.4); /* Based on heading color */
+
+  --submit-bg-color: hsl(205, 50%, 34%);
+  --submit-font-color: hsl(0, 0%, 96%);
+
+  --reset-shadow-color: hsl(205deg 50% 34%);
+  --reset-font-color: hsl(205, 50%, 34%);
 }
 
 [data-theme='dark'] {
@@ -177,6 +183,12 @@ table {
   --form-shadow-color: hsl(231deg 39% 8%);
   --legend-desc-color: hsl(194, 67%, 82%);
   --fieldset-line-color: hsla(0, 0%, 100%, 0.4); /* Based on heading color */
+
+  --submit-bg-color: hsl(180, 45%, 29%);
+  --submit-font-color: hsl(0, 0%, 96%);
+
+  --reset-shadow-color: hsl(0deg 0% 76%);
+  --reset-font-color: hsl(0, 0%, 96%);
 }
 
 html {
