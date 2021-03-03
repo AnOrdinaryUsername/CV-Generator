@@ -27,3 +27,18 @@
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   row-gap: 1.2rem;
 }
+
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  margin-top: 3.6rem;
+}
+
+@media (max-width: 456px) {
+  .button-container {
+    align-items: stretch;
+    flex-direction: column-reverse;
+  }
+}
