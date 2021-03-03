@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/cv-project/static/css/main.d7adf9af.chunk.css",
-    "main.js": "/cv-project/static/js/main.aee25811.chunk.js",
-    "main.js.map": "/cv-project/static/js/main.aee25811.chunk.js.map",
+    "main.css": "/cv-project/static/css/main.4381e986.chunk.css",
+    "main.js": "/cv-project/static/js/main.31524e0d.chunk.js",
+    "main.js.map": "/cv-project/static/js/main.31524e0d.chunk.js.map",
     "runtime-main.js": "/cv-project/static/js/runtime-main.9184ca22.js",
     "runtime-main.js.map": "/cv-project/static/js/runtime-main.9184ca22.js.map",
     "static/css/2.a2032d84.chunk.css": "/cv-project/static/css/2.a2032d84.chunk.css",
-    "static/js/2.61fd0bb2.chunk.js": "/cv-project/static/js/2.61fd0bb2.chunk.js",
-    "static/js/2.61fd0bb2.chunk.js.map": "/cv-project/static/js/2.61fd0bb2.chunk.js.map",
+    "static/js/2.17a31929.chunk.js": "/cv-project/static/js/2.17a31929.chunk.js",
+    "static/js/2.17a31929.chunk.js.map": "/cv-project/static/js/2.17a31929.chunk.js.map",
     "static/js/3.e1b101ce.chunk.js": "/cv-project/static/js/3.e1b101ce.chunk.js",
     "static/js/3.e1b101ce.chunk.js.map": "/cv-project/static/js/3.e1b101ce.chunk.js.map",
     "index.html": "/cv-project/index.html",
     "static/css/2.a2032d84.chunk.css.map": "/cv-project/static/css/2.a2032d84.chunk.css.map",
-    "static/css/main.d7adf9af.chunk.css.map": "/cv-project/static/css/main.d7adf9af.chunk.css.map",
-    "static/js/2.61fd0bb2.chunk.js.LICENSE.txt": "/cv-project/static/js/2.61fd0bb2.chunk.js.LICENSE.txt",
+    "static/css/main.4381e986.chunk.css.map": "/cv-project/static/css/main.4381e986.chunk.css.map",
+    "static/js/2.17a31929.chunk.js.LICENSE.txt": "/cv-project/static/js/2.17a31929.chunk.js.LICENSE.txt",
     "static/media/CormorantGaramond-Bold.9f7b94f2.ttf": "/cv-project/static/media/CormorantGaramond-Bold.9f7b94f2.ttf",
     "static/media/CormorantGaramond-Regular.e1f2c50e.ttf": "/cv-project/static/media/CormorantGaramond-Regular.e1f2c50e.ttf",
     "static/media/DejaVu-Sans.Book.3765b612.ttf": "/cv-project/static/media/DejaVu-Sans.Book.3765b612.ttf"
@@ -21,8 +21,8 @@
   "entrypoints": [
     "static/js/runtime-main.9184ca22.js",
     "static/css/2.a2032d84.chunk.css",
-    "static/js/2.61fd0bb2.chunk.js",
-    "static/css/main.d7adf9af.chunk.css",
-    "static/js/main.aee25811.chunk.js"
+    "static/js/2.17a31929.chunk.js",
+    "static/css/main.4381e986.chunk.css",
+    "static/js/main.31524e0d.chunk.js"
   ]
 }
