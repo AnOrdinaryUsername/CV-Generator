@@ -37,7 +37,40 @@
   width: min-content;
 }
 
-.submit,
+@media (max-width: 456px) {
+  .delete {
+    padding: 1.2rem 1.4rem;
+    place-self: stretch;
+    width: auto;
+  }
+}
+
+.submit {
+  background-color: var(--submit-bg-color);
+  color: var(--submit-font-color);
+  font-size: 1em;
+  font-weight: 500;
+  padding: 1.2rem 2.4rem;
+}
+
+.reset-form {
+  /* background-color: hsl(207, 27%, 30%); */
+  background: inherit;
+  color: var(--reset-font-color);
+  box-shadow: 0px 0px 3px 0px var(--reset-shadow-color);
+  font-size: 1em;
+  font-weight: 500;
+  margin-right: 1.4rem;
+  padding: 1.2rem 2.4rem;
+}
+
+@media (max-width: 456px) {
+  .reset-form {
+    margin-right: 0;
+    margin-top: 1.8rem;
+  }
+}
+
 .download {
   /*background-color: hsl(175, 84%, 32%);*/
   background-color: hsl(190, 56%, 78%);

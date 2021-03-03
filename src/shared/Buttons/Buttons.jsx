@@ -27,4 +27,12 @@ const SubmitButton = () => {
     return <button className="button submit">Submit</button>;
 };
 
-export { PrintButton, DownloadButton, SubmitButton };
+const ResetFormButton = ({ onClick }) => {
+    return (
+        <button onClick={onClick} className="button reset-form">
+            Reset Form
+        </button>
+    );
+};
+
+export { PrintButton, DownloadButton, SubmitButton, ResetFormButton };
