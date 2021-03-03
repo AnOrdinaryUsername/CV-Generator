@@ -12,7 +12,8 @@ class FormFieldset extends Component {
         };
 
         this.addNewInfo = this.addNewInfo.bind(this);
-        this.updateNewInfoCount = this.updateNewInfoCount.bind(this);
+        this.removeNewInfo = this.removeNewInfo.bind(this);
+        this.clearNewInfos = this.clearNewInfos.bind(this);
     }
 
     // Could've been done in the constructor but there's a lot of code.
@@ -34,7 +35,7 @@ class FormFieldset extends Component {
                     inputs: inputs,
                     sectionName: sectionName,
                     isPresent: true,
-                    removeInputs: this.updateNewInfoCount,
+                    removeInputs: this.removeNewInfo,
                     enableAnimation: true,
                     includeDelete: true,
                     onChange: onChange,
@@ -49,6 +50,20 @@ class FormFieldset extends Component {
         }
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.isReset !== prevProps.isReset) {
+            // This will cause 2 rerenders
+            this.clearNewInfos();
+            this.props.updateResetFlag();
+        }
+    }
+
+    clearNewInfos() {
+        this.setState({
+            info: [],
+        });
+    }
+
     addNewInfo(event) {
         event.preventDefault();
 
@@ -59,7 +74,7 @@ class FormFieldset extends Component {
             inputs: newInputs,
             sectionName: sectionName,
             isPresent: true,
-            removeInputs: this.updateNewInfoCount,
+            removeInputs: this.removeNewInfo,
             enableAnimation: true,
             includeDelete: true,
             onChange: onChange,
@@ -72,7 +87,7 @@ class FormFieldset extends Component {
         });
     }
 
-    updateNewInfoCount(index) {
+    removeNewInfo(index) {
         const updatedInfo = [...this.state.info];
         const NEW_INPUT_START = index + 1;
         updatedInfo[index].isPresent = !updatedInfo[index].isPresent;
@@ -110,7 +125,7 @@ class FormFieldset extends Component {
         const { info } = this.state;
         let newInfo = null;
 
-        if (info.length !== 0) {
+        if (info.length !== 0 && !this.props.isReset) {
             newInfo = info.map((props, indice) => {
                 // index is used as an identifier for newly add inputs
                 // storedInputs begin at 1 since initialInfo (name with no identifier) begins at 0
