@@ -20,8 +20,9 @@ class App extends Component {
     constructor() {
         super();
 
-        const template = {
+        this.template = {
             isSubmitted: false,
+            isReset: false,
             personal: [
                 {
                     firstName: '',
@@ -53,11 +54,7 @@ class App extends Component {
             ],
         };
 
-        let [storage, personal, education, work] = repeat(null);
-
-        storage = { ...localStorage };
-        // No need to store color theme in App state.
-        delete storage['theme'];
+        let [personal, education, work] = repeat(null);
 
         const checkStorage = (storageItem) => {
             const item = localStorage.getItem(storageItem);
@@ -66,15 +63,18 @@ class App extends Component {
                 return JSON.parse(item);
             }
 
-            return template[storageItem];
+            return this.template[storageItem];
         };
 
         personal = checkStorage('personal');
         education = checkStorage('education');
         work = checkStorage('work');
 
+        const { isSubmitted, isReset } = this.template;
+
         this.state = {
-            isSubmitted: false,
+            isSubmitted: isSubmitted,
+            isReset: isReset,
             personal: [...personal],
             education: [...education],
             work: [...work],
@@ -82,6 +82,7 @@ class App extends Component {
 
         this.submitForm = this.submitForm.bind(this);
         this.resetForm = this.resetForm.bind(this);
+        this.updateResetFlag = this.updateResetFlag.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.addNewInput = this.addNewInput.bind(this);
         this.removeNewInput = this.removeNewInput.bind(this);
@@ -307,39 +308,22 @@ class App extends Component {
         if (window.confirm('Are you sure you want to clear the form?')) {
             localStorage.clear();
 
+            const { isSubmitted, personal, education, work } = this.template;
+
             this.setState({
-                isSubmitted: false,
-                personal: [
-                    {
-                        firstName: '',
-                        lastName: '',
-                        email: '',
-                        phoneNumber: '',
-                        residence: '',
-                    },
-                ],
-                education: [
-                    {
-                        schoolName: '',
-                        fieldOfStudy: '',
-                        location: '',
-                        date: '',
-                        editor:
-                            '<ul><li><strong>Current GPA</strong>: 4.0</li><li><strong>Projects</strong>: Facebook clone, Battleship</li></ul>',
-                    },
-                ],
-                work: [
-                    {
-                        companyName: '',
-                        jobTitle: '',
-                        location: '',
-                        date: '',
-                        editor:
-                            '<ul><li>Coordinated movement of air wings at the Battle of Midway.</li></ul>',
-                    },
-                ],
+                isSubmitted: isSubmitted,
+                isReset: true,
+                personal: [...personal],
+                education: [...education],
+                work: [...work],
             });
         }
+    }
+
+    updateResetFlag() {
+        this.setState({
+            isReset: false,
+        });
     }
 
     submitForm() {
@@ -368,6 +352,8 @@ class App extends Component {
                             addNewInput={this.addNewInput}
                             removeNewInput={this.removeNewInput}
                             resetForm={this.resetForm}
+                            isReset={this.state.isReset}
+                            updateResetFlag={this.updateResetFlag}
                             storedInputs={this.state}
                         />
                     )}
