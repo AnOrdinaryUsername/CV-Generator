@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SubmitButton } from '../../../shared/Buttons/Buttons';
+import { ResetFormButton, SubmitButton } from '../../../shared/Buttons/Buttons';
 import FormFieldset from '../components/FormFieldset';
 import FormLayout from '../components/FormLayout';
 import './Form.css';
@@ -187,16 +187,17 @@ class Form extends Component {
                     return (
                         <FormFieldset
                             {...fieldsetData}
+                            {...this.props}
                             storedInputs={data[index]}
                             sectionName={sectionName[index]}
-                            onChange={this.props.onChange}
-                            addNewInput={this.props.addNewInput}
-                            removeNewInput={this.props.removeNewInput}
                             key={index}
                         />
                     );
                 })}
-                <SubmitButton />
+                <div className="button-container">
+                    <ResetFormButton onClick={this.props.resetForm} />
+                    <SubmitButton />
+                </div>
             </FormLayout>
         );
     }
