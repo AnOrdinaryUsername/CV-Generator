@@ -1,27 +1,41 @@
 import { Document, Font } from '@react-pdf/renderer';
 import React from 'react';
 import CV from '../components/CV';
-import cormorantBold from '../components/fonts/CormorantGaramond-Bold.ttf';
-import cormorantReg from '../components/fonts/CormorantGaramond-Regular.ttf';
 import unicodeChar from '../components/fonts/DejaVu-Sans.Book.ttf';
+import garamondBold from '../components/fonts/eb-garamond-v15-latin-700.ttf';
+import garamondBoldItalic from '../components/fonts/eb-garamond-v15-latin-700italic.ttf';
+import garamondItalic from '../components/fonts/eb-garamond-v15-latin-italic.ttf';
+import garamond from '../components/fonts/eb-garamond-v15-latin-regular.ttf';
 
 // Just for this character "❖"
 Font.register({
     family: 'DejaVu Sans',
-    format: 'TrueType',
+    format: 'truetype',
     src: unicodeChar,
 });
 
 Font.register({
-    family: 'Cormorant Garamond Bold',
-    format: 'TrueType',
-    src: cormorantBold,
+    family: 'Garamond Regular',
+    format: 'truetype',
+    src: garamond,
 });
 
 Font.register({
-    family: 'Cormorant Garamond Regular',
-    format: 'TrueType',
-    src: cormorantReg,
+    family: 'Garamond Bold',
+    format: 'truetype',
+    src: garamondBold,
+});
+
+Font.register({
+    family: 'Garamond Italic',
+    format: 'truetype',
+    src: garamondItalic,
+});
+
+Font.register({
+    family: 'Garamond Bold Italic',
+    format: 'truetype',
+    src: garamondBoldItalic,
 });
 
 const PDF = ({ data }) => {
