@@ -305,7 +305,7 @@ class App extends Component {
     resetForm(event) {
         event.preventDefault();
 
-        if (window.confirm('Are you sure you want to clear the form?')) {
+        if (window.confirm('Are you sure you want to reset the form?')) {
             localStorage.clear();
 
             const { isSubmitted, personal, education, work } = this.template;
