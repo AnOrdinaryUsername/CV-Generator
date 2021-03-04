@@ -3,18 +3,7 @@ import React, { Component } from 'react';
 import Form from '../features/form/screens/Form';
 import Header from '../features/navbar/screens/Header';
 import PDF from '../features/pdf/screens/PDF';
-
-// object => object literal
-// prop => string (the property inside the object literal)
-// return => boolean
-const objectHasProperty = (object, prop) => ({}.propertyIsEnumerable.call(object, prop));
-
-// Just to assign multiple variables a single value easily.
-function* repeat(value) {
-    while (true) {
-        yield value;
-    }
-}
+import { objectHasProperty, repeat } from '../utils/utility';
 
 class App extends Component {
     constructor() {
