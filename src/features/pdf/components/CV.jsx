@@ -1,6 +1,8 @@
 import { Page, StyleSheet } from '@react-pdf/renderer';
 import React from 'react';
 import PersonalInfo from './PersonalInfo';
+import WorkExperience from './WorkExperience';
+//import EducationHistory from './EducationHistory';
 
 const styles = StyleSheet.create({
     page: {
@@ -16,6 +18,7 @@ const CV = ({ userData }) => {
     return (
         <Page style={styles.page}>
             <PersonalInfo userInfo={userData.personal[0]} />
+            <WorkExperience userInfo={userData.work} />
         </Page>
     );
 };
