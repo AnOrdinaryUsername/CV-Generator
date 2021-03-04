@@ -4,23 +4,23 @@ import React from 'react';
 const styles = StyleSheet.create({
     section: {
         alignItems: 'baseline',
-        borderBottom: '0.1 solid #000000',
+        borderBottom: '1 solid #000000',
         display: 'flex',
         flexDirection: 'column',
         paddingBottom: 4,
         justifyContent: 'flex-start',
     },
     name: {
+        fontFamily: 'Garamond Bold',
         fontSize: 24,
-        fontWeight: 'bold',
         lineHeight: 1.2,
     },
     details: {
         alignItems: 'baseline',
         display: 'flex',
         flexDirection: 'row',
+        fontFamily: 'Garamond Regular',
         fontSize: 16,
-        fontWeight: 'light',
         justifyContent: 'flex-start',
     },
     specialCharacter: {
