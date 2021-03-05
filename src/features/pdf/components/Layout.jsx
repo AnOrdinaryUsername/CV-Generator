@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from '@react-pdf/renderer';
 import React from 'react';
+import List, { Item } from './List';
 
 const section = StyleSheet.create({
     heading: {
@@ -25,7 +26,6 @@ const SubSection = ({ children }) => {
 
 const sectionRow = StyleSheet.create({
     row: {
-        display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
@@ -95,4 +95,45 @@ const SubSectionRow = ({ type, fontSize, columnOne, columnTwo }) => {
     );
 };
 
-export { SectionHeading, SubSection, SubSectionRow };
+const SubSectionList = ({ data }) => {
+    const parser = new DOMParser().parseFromString(data, 'text/html');
+    const bulletPoints = [...parser.querySelectorAll('li')];
+
+    const list = bulletPoints.map((listItem) => {
+        const listData = [];
+        const childNodeCount = listItem.childNodes.length;
+
+        for (let i = 0; i < childNodeCount; ++i) {
+            const node = listItem.childNodes[i];
+
+            // If node is of type 'Element' return HTML string
+            if (node.outerHTML) {
+                listData.push(node.outerHTML);
+                // Otherwise grab text from 'Text' node
+            } else {
+                listData.push(node.textContent);
+            }
+        }
+
+        return listData;
+    });
+
+    return (
+        <View>
+            {list.map((data) => {
+                return (
+                    <List>
+                        <Item>
+                            {data.map((element) => {
+                                // TODO: Create specific text element using switch statement
+                                // (e.g. BoldText for element containing '<strong>GPA</strong>').
+                            })}
+                        </Item>
+                    </List>
+                );
+            })}
+        </View>
+    );
+};
+
+export { SectionHeading, SubSection, SubSectionRow, SubSectionList };
