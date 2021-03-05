@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
     section: {
         alignItems: 'baseline',
         borderBottom: '1 solid #000000',
-        display: 'flex',
         flexDirection: 'column',
         paddingBottom: 4,
         justifyContent: 'flex-start',
@@ -17,7 +16,6 @@ const styles = StyleSheet.create({
     },
     details: {
         alignItems: 'baseline',
-        display: 'flex',
         flexDirection: 'row',
         fontFamily: 'Garamond Regular',
         fontSize: 16,
@@ -41,11 +39,9 @@ const PersonalInfo = ({ userInfo }) => {
             <Text style={styles.name}>{`${firstName} ${lastName}`}</Text>
             <View style={styles.details}>
                 <Text>{email}</Text>
-                <View style={styles.details}>
-                    <Text style={styles.specialCharacter}>{blackDiamond}</Text>
-                    <Text>{phoneNumber}</Text>
-                    <Text style={styles.specialCharacter}>{blackDiamond}</Text>
-                </View>
+                <Text style={styles.specialCharacter}>{blackDiamond}</Text>
+                <Text>{phoneNumber}</Text>
+                <Text style={styles.specialCharacter}>{blackDiamond}</Text>
                 <Text>{residence}</Text>
             </View>
         </View>

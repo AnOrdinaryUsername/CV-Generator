@@ -7,7 +7,6 @@ import WorkExperience from './WorkExperience';
 const styles = StyleSheet.create({
     page: {
         backgroundColor: '#FFFFFF',
-        display: 'flex',
         justifyContent: 'flex-start',
         padding: 36,
         width: '100%',

@@ -8,8 +8,7 @@ const WorkExperience = ({ userInfo }) => {
         <View>
             <SectionHeading title="Work Experience" />
             {userInfo.map((data, index) => {
-                let id = null;
-                let [companyName, date, jobTitle, location] = repeat(null);
+                let [companyName, date, id, jobTitle, location] = repeat(null);
 
                 if (index > 0) {
                     id = index - 1;
