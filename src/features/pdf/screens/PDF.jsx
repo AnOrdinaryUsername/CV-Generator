@@ -7,35 +7,40 @@ import garamondBoldItalic from '../components/fonts/eb-garamond-v15-latin-700ita
 import garamondItalic from '../components/fonts/eb-garamond-v15-latin-italic.ttf';
 import garamond from '../components/fonts/eb-garamond-v15-latin-regular.ttf';
 
-// Just for this character "❖"
+/**
+ *  NOTE: All Garamond fonts were downloaded from here:
+ *  https://google-webfonts-helper.herokuapp.com/fonts/eb-garamond?subsets=latin
+ *
+ *  For some reason, downloading the ttfs from Google Fonts didn't work, nor did using
+ *  a Google Fonts url work either.
+ */
+Font.register({
+    family: 'Garamond',
+    fonts: [
+        {
+            src: garamond,
+        },
+        {
+            src: garamondBold,
+            fontWeight: 'bold',
+        },
+        {
+            src: garamondItalic,
+            fontStyle: 'italic',
+        },
+        {
+            src: garamondBoldItalic,
+            fontWeight: 'bold',
+            fontStyle: 'italic',
+        },
+    ],
+});
+
+// Just for these characters "❖" abd  "▪"
 Font.register({
     family: 'DejaVu Sans',
     format: 'truetype',
     src: unicodeChar,
-});
-
-Font.register({
-    family: 'Garamond Regular',
-    format: 'truetype',
-    src: garamond,
-});
-
-Font.register({
-    family: 'Garamond Bold',
-    format: 'truetype',
-    src: garamondBold,
-});
-
-Font.register({
-    family: 'Garamond Italic',
-    format: 'truetype',
-    src: garamondItalic,
-});
-
-Font.register({
-    family: 'Garamond Bold Italic',
-    format: 'truetype',
-    src: garamondBoldItalic,
 });
 
 const PDF = ({ data }) => {
