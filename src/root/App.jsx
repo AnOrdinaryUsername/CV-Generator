@@ -2,7 +2,7 @@ import { PDFViewer } from '@react-pdf/renderer';
 import React, { Component } from 'react';
 import Form from '../features/form/screens/Form';
 import Header from '../features/navbar/screens/Header';
-import PDF from '../features/pdf/screens/PDF';
+import { PageOptions, PDF } from '../features/pdf/screens';
 import { objectHasProperty, repeat } from '../utils/utility';
 
 class App extends Component {
@@ -323,7 +323,7 @@ class App extends Component {
 
     render() {
         const { isSubmitted, personal } = this.state;
-        const userName = `${personal[0].firstName}${personal[0].lastName}CV`;
+        const userName = `${personal[0].firstName}${personal[0].lastName}CV.pdf`;
 
         let UserPDF = null;
         if (this.state.isSubmitted) {
@@ -348,11 +348,14 @@ class App extends Component {
                     )}
                     {isSubmitted && (
                         <>
-                            <PDFViewer width={'80%'} height={'100%'}>
+                            <PDFViewer width={'80%'} height={'800'}>
                                 {UserPDF}
                             </PDFViewer>
-
-                            <button onClick={this.submitForm}>{'< Go back'}</button>
+                            <PageOptions
+                                document={UserPDF}
+                                fileName={userName}
+                                onClick={this.submitForm}
+                            />
                         </>
                     )}
                 </main>
