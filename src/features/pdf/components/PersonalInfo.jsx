@@ -10,14 +10,15 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
     },
     name: {
-        fontFamily: 'Garamond Bold',
+        fontFamily: 'Garamond',
+        fontWeight: 'bold',
         fontSize: 24,
         lineHeight: 1.2,
     },
     details: {
         alignItems: 'baseline',
         flexDirection: 'row',
-        fontFamily: 'Garamond Regular',
+        fontFamily: 'Garamond',
         fontSize: 16,
         justifyContent: 'flex-start',
     },
