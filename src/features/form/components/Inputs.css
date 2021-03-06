@@ -24,6 +24,12 @@
   padding: 0 1.6rem;
 }
 
+@media (max-width: 992px) {
+  .input input {
+    background-color: hsl(0, 0%, 100%);
+  }
+}
+
 .new-info {
   background-color: inherit;
   color: var(--legend-desc-color);
