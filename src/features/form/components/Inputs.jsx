@@ -23,7 +23,11 @@ const Input = ({
     switch (type) {
         case 'text':
             // Allows all language characters. \w allows whitespace
-            inputProps.pattern = '^[\\p{L}\\p{M}, ]*$';
+            inputProps.pattern = '^[\\p{L}\\p{M}., ]*$';
+            inputProps.type = 'text';
+            break;
+        case 'textDate':
+            inputProps.pattern = '^[\\p{L}\\p{M}0-9\\-., ]*$';
             inputProps.type = 'text';
             break;
         case 'email':

@@ -102,7 +102,7 @@ class Form extends Component {
                                 placeholder: 'e.g. Oahu, HI',
                             },
                             {
-                                type: 'text',
+                                type: 'textDate',
                                 label: 'Date',
                                 isRequired: false,
                                 name: 'date',
@@ -154,7 +154,7 @@ class Form extends Component {
                                 placeholder: 'e.g. Oahu, HI',
                             },
                             {
-                                type: 'text',
+                                type: 'textDate',
                                 label: 'Date',
                                 isRequired: false,
                                 name: 'date',
