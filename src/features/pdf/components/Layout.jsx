@@ -5,8 +5,9 @@ import List, { Item } from './List';
 const section = StyleSheet.create({
     heading: {
         borderBottom: '1 solid #000000',
-        fontFamily: 'Garamond Bold',
+        fontFamily: 'Garamond',
         fontSize: 12,
+        fontWeight: 'bold',
         marginTop: 16,
         textTransform: 'uppercase',
         paddingBottom: 2,
@@ -20,8 +21,12 @@ const SectionHeading = ({ title }) => {
     return <Text style={section.heading}>{title}</Text>;
 };
 
-const SubSection = ({ children }) => {
-    return <View style={section.subSection}>{children}</View>;
+const SubSection = ({ children, marginTop }) => {
+    const marginTopStyle = {
+        marginTop: marginTop,
+    };
+
+    return <View style={marginTopStyle}>{children}</View>;
 };
 
 const sectionRow = StyleSheet.create({
@@ -30,10 +35,12 @@ const sectionRow = StyleSheet.create({
         justifyContent: 'space-between',
     },
     bold: {
-        fontFamily: 'Garamond Bold',
+        fontFamily: 'Garamond',
+        fontWeight: 'bold',
     },
     italic: {
-        fontFamily: 'Garamond Italic',
+        fontFamily: 'Garamond',
+        fontStyle: 'italic',
     },
 });
 
@@ -95,12 +102,61 @@ const SubSectionRow = ({ type, fontSize, columnOne, columnTwo }) => {
     );
 };
 
+const item = StyleSheet.create({
+    listItem: {
+        fontFamily: 'Garamond',
+    },
+    bold: {
+        fontWeight: 'bold',
+    },
+    italic: {
+        fontStyle: 'italic',
+    },
+    boldAndItalic: {
+        fontWeight: 'bold',
+        fontStyle: 'italic',
+    },
+    underline: {
+        textDecoration: 'underline',
+    },
+});
+
+const SubSectionListItem = ({ node }) => {
+    const nodeText = new DOMParser().parseFromString(node, 'text/html').documentElement.textContent;
+
+    let fontStyle = null;
+    let decorationStyle = null;
+
+    if (node.includes('<strong>') && node.includes('<em>')) {
+        fontStyle = item.boldAndItalic;
+    } else if (node.includes('<strong>')) {
+        fontStyle = item.bold;
+    } else if (node.includes('<em>')) {
+        fontStyle = item.italic;
+    }
+
+    if (node.includes('<u>')) {
+        decorationStyle = item.underline;
+    }
+
+    return <Text style={[item.listItem, fontStyle, decorationStyle]}>{nodeText}</Text>;
+};
+
 const SubSectionList = ({ data }) => {
     const parser = new DOMParser().parseFromString(data, 'text/html');
+    // Stores all <li>s and their contents in 1D array.
     const bulletPoints = [...parser.querySelectorAll('li')];
 
+    /* Goes through each <li> and stores all the individual nodes in an array (which is inside
+     *  another array so it's 2D).
+     *
+     * e.g. const bulletPoints = [ "<li>Wowee<li>", "<li><em>italic</em> text</li>"];
+     *
+     *       map result:
+     *       const list = [ ["Wowee"], ["<em>italic</em>", " text"] ];
+     */
     const list = bulletPoints.map((listItem) => {
-        const listData = [];
+        const listNode = [];
         const childNodeCount = listItem.childNodes.length;
 
         for (let i = 0; i < childNodeCount; ++i) {
@@ -108,30 +164,29 @@ const SubSectionList = ({ data }) => {
 
             // If node is of type 'Element' return HTML string
             if (node.outerHTML) {
-                listData.push(node.outerHTML);
+                listNode.push(node.outerHTML);
                 // Otherwise grab text from 'Text' node
             } else {
-                listData.push(node.textContent);
+                listNode.push(node.textContent);
             }
         }
 
-        return listData;
+        return listNode;
     });
 
     return (
         <View>
-            {list.map((data) => {
-                return (
-                    <List>
+            <List>
+                {list.map((item) => {
+                    return (
                         <Item>
-                            {data.map((element) => {
-                                // TODO: Create specific text element using switch statement
-                                // (e.g. BoldText for element containing '<strong>GPA</strong>').
+                            {item.map((node) => {
+                                return <SubSectionListItem node={node} />;
                             })}
                         </Item>
-                    </List>
-                );
-            })}
+                    );
+                })}
+            </List>
         </View>
     );
 };
