@@ -1,0 +1,27 @@
+.page-options {
+  align-items: baseline;
+  display: flex;
+  justify-content: center;
+  margin-top: 3.6rem;
+  width: 100%;
+}
+
+/* Since .download is nested inside an <a>, we give it
+    width 100% to make it stretch.
+*/
+.page-options .download {
+  width: 100%;
+}
+
+/* Large svgs look better centered instead of baseline. */
+.page-options .button {
+  align-items: center;
+}
+
+@media (max-width: 456px) {
+  .page-options {
+    align-items: stretch;
+    flex-direction: column-reverse;
+    padding: 0 4.8rem;
+  }
+}
