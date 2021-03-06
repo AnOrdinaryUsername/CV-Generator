@@ -43,7 +43,7 @@ class CustomEditor extends Component {
  * See https://quilljs.com/docs/modules/ for complete options
  */
 CustomEditor.modules = {
-    toolbar: [['bold', 'italic', 'underline', 'strike'], [{ list: 'bullet' }], ['clean']],
+    toolbar: [['bold', 'italic', 'underline'], [{ list: 'bullet' }], ['clean']],
     clipboard: {
         // toggle to add extra line breaks when pasting HTML:
         matchVisual: false,
@@ -54,6 +54,6 @@ CustomEditor.modules = {
  * Quill editor formats
  * See https://quilljs.com/docs/formats/
  */
-CustomEditor.formats = ['bold', 'italic', 'underline', 'strike', 'list', 'bullet'];
+CustomEditor.formats = ['bold', 'italic', 'underline', 'list', 'bullet'];
 
 export default CustomEditor;
