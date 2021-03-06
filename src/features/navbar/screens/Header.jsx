@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ColorThemeButton from '../components/ColorThemeButton';
+import GitHubRepo from '../components/GitHubRepo';
 
 const root = document.documentElement;
 
@@ -62,6 +63,7 @@ class Header extends Component {
 
         return (
             <header>
+                <GitHubRepo />
                 <ColorThemeButton themeState={isLightTheme} clickHandler={this.changeTheme} />
             </header>
         );

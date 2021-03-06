@@ -254,11 +254,18 @@ header {
   font-size: 2.8rem;
 }
 
-header button {
+header button,
+header a {
   border: none;
   background: inherit;
   color: inherit;
   font-size: inherit;
+  height: 100%;
+}
+
+header a {
+  margin-right: 0.8rem;
+  padding: 0 1.2rem;
 }
 
 main {
