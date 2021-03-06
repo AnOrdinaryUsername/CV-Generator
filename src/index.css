@@ -200,6 +200,10 @@ html {
   transition: color 300ms, background-color 300ms;
 }
 
+a {
+  text-decoration: none;
+}
+
 body {
   display: flex;
   flex: 1;
