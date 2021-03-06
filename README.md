@@ -1,4 +1,4 @@
-# cv-project
+# CV-Generator
 
 ## Features
 

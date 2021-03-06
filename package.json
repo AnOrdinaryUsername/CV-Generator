@@ -1,7 +1,7 @@
 {
   "name": "cv-project",
   "version": "0.1.0",
-  "homepage": "https://anordinaryusername.github.io/cv-project/",
+  "homepage": "https://anordinaryusername.github.io/CV-Generator/",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
