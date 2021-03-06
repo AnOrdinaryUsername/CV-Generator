@@ -14,10 +14,13 @@ const styles = StyleSheet.create({
 });
 
 const CV = ({ userData }) => {
+    const FIRST_ROW_GAP = 8;
+    const ROW_GAP = 14;
+
     return (
         <Page style={styles.page}>
             <PersonalInfo userInfo={userData.personal[0]} />
-            <WorkExperience userInfo={userData.work} />
+            <WorkExperience userInfo={userData.work} firstRowGap={FIRST_ROW_GAP} rowGap={ROW_GAP} />
         </Page>
     );
 };
