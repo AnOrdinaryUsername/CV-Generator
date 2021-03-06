@@ -1,20 +1,18 @@
-import { faDownload, faPrint } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faDownload } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import './Buttons.css';
 
-const PrintButton = () => {
-    const printPage = () => window.print();
-
+const GoBackButton = ({ onClick }) => {
     return (
-        <button className="button button--md print" onClick={printPage}>
-            <FontAwesomeIcon icon={faPrint} />
-            Print page
+        <button className="button go-back" onClick={onClick}>
+            <FontAwesomeIcon icon={faArrowLeft} />
+            Go Back
         </button>
     );
 };
 
-const DownloadButton = ({ firstName, lastName }) => {
+const DownloadButton = () => {
     return (
         <button className="button button--md download">
             <FontAwesomeIcon icon={faDownload} />
@@ -35,4 +33,4 @@ const ResetFormButton = ({ onClick }) => {
     );
 };
 
-export { PrintButton, DownloadButton, SubmitButton, ResetFormButton };
+export { GoBackButton, DownloadButton, SubmitButton, ResetFormButton };
